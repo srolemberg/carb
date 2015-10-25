@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputDescricaoCalibragem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="8dp">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spnDispositivo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputNomeDispositivo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/etNomeDispositivo"
+                android:hint="Nome do Dispositivo"
+                android:inputType="textPersonName"
+                android:maxLength="15"
+                android:singleLine="true"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continuar"
+        android:id="@+id/btnSalvarDispositivo"
+        style="?buttonBarPositiveButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/btnCancelarDispositivo"
+        style="?buttonBarNegativeButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toLeftOf="@+id/btnSalvarDispositivo"
+        android:layout_toStartOf="@+id/btnSalvarDispositivo"
+        android:layout_marginTop="16dp"/>
+
+
+</RelativeLayout>

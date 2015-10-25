@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="instrumentos_array">
+        <item>Instrumento...</item>
+        <item>Guitarra</item>
+        <item>Guitarra Pro</item>
+        <item>Baixo</item>
+        <item>Baixo Pro</item>
+        <item>Bateria</item>
+        <item>Bateria Avançado</item>
+        <item>Bateria Pro</item>
+        <item>Vocal</item>
+        <item>Vocal Grupo</item>
+        <item>Teclado</item>
+        <item>Teclado Avançado</item>
+        <item>Teclado Pro</item>
+        <item>Controle</item>
+        <item>Tapede Dança</item>
+        <item>Teclado PC</item>
+    </string-array>
+
+</resources>

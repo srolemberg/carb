@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputTituloCalibragem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etTituloCalibragem"
+            android:hint="Título"
+            android:inputType="textPersonName"
+            android:maxLength="15"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputDescricaoCalibragem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputTituloCalibragem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etDescricaoCalibragem"
+            android:hint="Descrição"
+            android:inputType="textMultiLine|textPersonName"
+            android:maxLength="60"
+            android:maxLines="2"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputDescricaoCalibragem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="8dp">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spnInstrumento"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputAudioCalibragem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/etAudioCalibragem"
+                android:hint="Audio"
+                android:inputType="numberSigned"
+                android:maxLength="4"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputVideoCalibragem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/etVideoCalibragem"
+                android:hint="Video"
+                android:inputType="numberSigned"
+                android:maxLength="4"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/btnSalvarCalibragem"
+        style="?buttonBarPositiveButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/btnCancelarCalibragem"
+        style="?buttonBarNegativeButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toLeftOf="@+id/btnSalvarCalibragem"
+        android:layout_toStartOf="@+id/btnSalvarCalibragem"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
