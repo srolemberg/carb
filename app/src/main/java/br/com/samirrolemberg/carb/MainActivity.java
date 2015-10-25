@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -61,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         dispositivos = daoDispositivo.listarTudo();
         DatabaseManager.getInstance().closeDatabase();
 
-//        for (int i = 0; i < 10; i++) {
-//            dispositivos.add(new Dispositivo.Builder().withNome(UUID.randomUUID().toString()).build());
-//        }
-
         adapter = new DispositivoAdapter(dispositivos);
 
         rvDispositivo = (RecyclerView) findViewById(R.id.rvDispositivos);
@@ -74,21 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         rvDispositivo.setLayoutManager(layoutManager);
         rvDispositivo.setAdapter(adapter);
-
-//        List<Mock> mocks = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            mocks.add(new Mock(i, UUID.randomUUID().toString()));
-//        }
-//
-//        MockAdapter adapter = new MockAdapter(mocks);
-//
-//        RecyclerView rvDispositivo = (RecyclerView) findViewById(R.id.rvDispositivos);
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//
-//        layoutManager.setSmoothScrollbarEnabled(true);
-//        rvDispositivo.setLayoutManager(layoutManager);
-//        rvDispositivo.setAdapter(adapter);
 
     }
 
@@ -161,20 +143,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (item.getItemId() == R.id.menu_dispositivo_configurar) {
+            Toast.makeText(MainActivity.this, "click Menu Configurar", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (item.getItemId() == R.id.menu_dispositivo_sobre_carb) {
+            Toast.makeText(MainActivity.this, "click Menu carb", Toast.LENGTH_LONG).show();
             return true;
         }
 
