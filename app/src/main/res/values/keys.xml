@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The application name. Defaults to name specified for the application label -->
+    <string name="ga_app_key">UA-69280316-1</string>
+</resources>

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -83,15 +86,12 @@ public class U {
 			sumVideo += calibragem.getVideo() == null ? 0 : calibragem.getVideo();
 		}
 
-		DecimalFormat format = new DecimalFormat("######");
-		format.setRoundingMode(RoundingMode.UP);
-
-		if(sumAudio > 0){
+		if(sumAudio != 0){
 			double audio = sumAudio/calibragens.size();
 			if(isToolbar){
-				tvaudio.setText("Audio > "+format.format(audio)+" ms");
+				tvaudio.setText("Audio > "+audio+" ms");
 			}else{
-				tvaudio.setText(format.format(audio));
+				tvaudio.setText(audio+"");
 			}
 		}else{
 			if(isToolbar){
@@ -101,12 +101,12 @@ public class U {
 			}
 		}
 
-		if(sumVideo > 0){
+		if(sumVideo != 0){
 			double video = sumVideo/calibragens.size();
 			if(isToolbar){
-				tvvideo.setText("Video > "+format.format(video)+" ms");
+				tvvideo.setText("Video > "+video+" ms");
 			}else{
-				tvvideo.setText(format.format(video));
+				tvvideo.setText(video+"");
 			}
 		}else{
 			if(isToolbar){
@@ -117,7 +117,6 @@ public class U {
 		}
 
 	}
-
 
 	public static int getNumeroColunas(){
 

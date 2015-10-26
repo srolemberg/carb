@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +19,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ import br.com.samirrolemberg.carb.adapter.DispositivoAdapter;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Dispositivo;
+import br.com.samirrolemberg.carb.utils.C;
 import br.com.samirrolemberg.carb.utils.U;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private DispositivoAdapter adapter;
     private RecyclerView rvDispositivo;
     private GridLayoutManager layoutManager;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        C.getTracker().setScreenName(MainActivity.class.getSimpleName());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,10 +160,20 @@ public class MainActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.menu_dispositivo_configurar) {
             Toast.makeText(MainActivity.this, "click Menu Configurar", Toast.LENGTH_LONG).show();
+            C.getTracker().send(new HitBuilders.EventBuilder()
+                    .setCategory("Menu Principal")
+                    .setAction("Configurar")
+                    .setLabel("abrir")
+                    .build());
             return true;
         }
         if (item.getItemId() == R.id.menu_dispositivo_sobre_carb) {
-            Toast.makeText(MainActivity.this, "click Menu carb", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "click Menu CARB", Toast.LENGTH_LONG).show();
+            C.getTracker().send(new HitBuilders.EventBuilder()
+                    .setCategory("Menu Principal")
+                    .setAction("Sobre CARB")
+                    .setLabel("abrir")
+                    .build());
             return true;
         }
 

@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +45,12 @@ public class CalibragemActivity extends AppCompatActivity {
     private List<Calibragem> calibragens;
 
     private TextView audioToolBar, videoToolBar;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        C.getTracker().setScreenName(CalibragemActivity.class.getSimpleName());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
