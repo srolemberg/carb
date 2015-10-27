@@ -114,7 +114,7 @@ public class DAOCalibragem extends DAO{
 
 	public int remover(Calibragem calibragem){
 		String[] args = {calibragem.getId()+""};
-		return database.delete(TABLE, "idPost=?", args);
+		return database.delete(TABLE, "id=?", args);
 	}
 
 

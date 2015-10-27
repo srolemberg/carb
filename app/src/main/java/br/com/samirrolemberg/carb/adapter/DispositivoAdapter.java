@@ -1,6 +1,8 @@
 package br.com.samirrolemberg.carb.adapter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -16,9 +18,11 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.samirrolemberg.carb.CalibragemActivity;
+import br.com.samirrolemberg.carb.MainActivity;
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
+import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.C;
@@ -30,6 +34,7 @@ import br.com.samirrolemberg.carb.utils.U;
 public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Dispositivo> itens;
+    //private MainActivity activity;
 
     public DispositivoAdapter(List<Dispositivo> itens) {
         super();
@@ -104,7 +109,9 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.menu_dispositivo_detalhes) {
-                    Toast.makeText(holder.btnMenuDispositivo.getContext(), "Click Menu Detalhes", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(holder.layCard.getContext(), CalibragemActivity.class);
+                    intent.putExtra("dispositivo", itens.get(position));
+                    holder.layCard.getContext().startActivity(intent);
                     return true;
                 }
                 if (item.getItemId() == R.id.menu_dispositivo_editar) {
@@ -112,7 +119,38 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     return true;
                 }
                 if (item.getItemId() == R.id.menu_dispositivo_excluir) {
-                    Toast.makeText(holder.btnMenuDispositivo.getContext(), "Click Menu Excluir", Toast.LENGTH_LONG).show();
+                    AlertDialog alertDialog = new AlertDialog.Builder(holder.layCard.getContext())
+                            .setTitle("Excluir")
+                            .setMessage("Deseja realmente excluir o item: '" + itens.get(position).getNome() + "' ?")
+                            .setCancelable(true)
+                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //remove todas as calibragens de um dispositivo
+                                    DAOCalibragem daoCalibragem = new DAOCalibragem(holder.layCard.getContext());
+                                    List<Calibragem> calibragens = daoCalibragem.listarTudo(itens.get(position));
+
+                                    for (Calibragem c : calibragens) {
+                                        daoCalibragem.remover(c);
+                                    }
+                                    DatabaseManager.getInstance().closeDatabase();//fecha conexão de calibragem
+
+                                    DAODispositivo daoDispositivo = new DAODispositivo(holder.layCard.getContext());
+                                    daoDispositivo.remover(itens.get(position));
+                                    DatabaseManager.getInstance().closeDatabase();
+
+                                    itens.remove(position);
+                                    notifyItemRemoved(position);
+
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
                     return true;
                 }
                 return false;

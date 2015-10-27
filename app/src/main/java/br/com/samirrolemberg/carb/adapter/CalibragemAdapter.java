@@ -1,5 +1,7 @@
 package br.com.samirrolemberg.carb.adapter;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -17,6 +19,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.samirrolemberg.carb.R;
+import br.com.samirrolemberg.carb.conn.DatabaseManager;
+import br.com.samirrolemberg.carb.daos.DAOCalibragem;
+import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.utils.C;
 import br.com.samirrolemberg.carb.utils.U;
@@ -90,8 +95,30 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     return true;
                 }
                 if(item.getItemId() == R.id.menu_calibragem_excluir){
-                    Toast.makeText(holder.btnMenuCalibragem.getContext(),"Click Menu Excluir", Toast.LENGTH_LONG).show();
-                    return true;
+                    AlertDialog alertDialog = new AlertDialog.Builder(holder.layCard.getContext())
+                            .setTitle("Excluir")
+                            .setMessage("Deseja realmente excluir o item: '" + itens.get(position).getTitulo() + "' ?")
+                            .setCancelable(true)
+                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //remove todas as calibragens de um dispositivo
+                                    DAOCalibragem daoCalibragem = new DAOCalibragem(holder.layCard.getContext());
+                                    daoCalibragem.remover(itens.get(position));
+                                    DatabaseManager.getInstance().closeDatabase();//fecha conexão de calibragem
+
+                                    itens.remove(position);
+                                    notifyItemRemoved(position);
+
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();                    return true;
                 }
                 return false;
             }
