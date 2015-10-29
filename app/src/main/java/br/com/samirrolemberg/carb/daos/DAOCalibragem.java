@@ -49,14 +49,15 @@ public class DAOCalibragem extends DAO{
 			Cursor cursor = database.rawQuery(sql.toString(), args);
 			if (cursor.moveToNext()) {
 				calibragem = new Calibragem.Builder()
-						.withAudio(cursor.getInt(cursor.getColumnIndex("audio")))
-						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
-						.withDescricao(cursor.getString(cursor.getColumnIndex("descricao")))
-						.withDispositivo(dis)
 						.withId(cursor.getInt(cursor.getColumnIndex("id")))
 						.withTipo(cursor.getInt(cursor.getColumnIndex("tipo")))
 						.withTitulo(cursor.getString(cursor.getColumnIndex("titulo")))
+						.withDescricao(cursor.getString(cursor.getColumnIndex("descricao")))
+						.withAudio(cursor.getInt(cursor.getColumnIndex("audio")))
 						.withVideo(cursor.getInt(cursor.getColumnIndex("video")))
+						.withDispositivo(dis)
+						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
+						.withUltimaAtualizacao(new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))))
 						.build();
 			}
 			cursor.close();
@@ -118,17 +119,17 @@ public class DAOCalibragem extends DAO{
 	}
 
 
-	public int atualiza(Calibragem calibragem, long id) {
+	public long atualiza(Calibragem calibragem) {
 		ContentValues values = new ContentValues();
 
 		values.put("audio", calibragem.getAudio());
 		values.put("video", calibragem.getVideo());
 		values.put("descricao", calibragem.getDescricao());
 		values.put("titulo", calibragem.getTitulo());
-		values.put("dataCriacao", calibragem.getDataCriacao()==null?null:calibragem.getDataCriacao().getTime());
+		values.put("ultimaAtualizacao", calibragem.getUltimaAtualizacao()==null?null:calibragem.getUltimaAtualizacao().getTime());
 		values.put("tipo", calibragem.getTipo());
 
-		String[] args = {id+""};
+		String[] args = {calibragem.getId()+""};
 
 		return database.update(TABLE, values, "id = ?", args);
 	}

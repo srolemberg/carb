@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -65,7 +66,7 @@ public class CalibragemActivity extends AppCompatActivity {
         calibragens = daoCalibragem.listarTudo(dispositivo);
         DatabaseManager.getInstance().closeDatabase();
 
-        adapter = new CalibragemAdapter(calibragens);
+        adapter = new CalibragemAdapter(calibragens, CalibragemActivity.this);
 
         rvCalibragem = (RecyclerView) findViewById(R.id.rvCalibragem);
 
@@ -164,6 +165,100 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
 
+            }
+        });
+
+        btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public void exibirDialog(final Activity context, final Calibragem calibragem){
+        final View view = CalibragemActivity.this.getLayoutInflater().inflate(R.layout.dialog_add_calibragem, null);
+
+        final Button btnPositive = (Button) view.findViewById(R.id.btnSalvarCalibragem);
+        final Button btnNegative = (Button) view.findViewById(R.id.btnCancelarCalibragem);
+
+        final EditText titulo = (EditText) view.findViewById(R.id.etTituloCalibragem);
+        final EditText descricao = (EditText) view.findViewById(R.id.etDescricaoCalibragem);
+        final EditText audio = (EditText) view.findViewById(R.id.etAudioCalibragem);
+        final EditText video = (EditText) view.findViewById(R.id.etVideoCalibragem);
+
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .setView(view)
+                .setTitle("Modifique os dados do Instrumento")
+                .create();
+
+        final Spinner spn = (Spinner) view.findViewById(R.id.spnInstrumento);
+        ArrayAdapter<CharSequence> spnAdapter = ArrayAdapter.createFromResource(context,
+                R.array.instrumentos_array, android.R.layout.simple_spinner_item);
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spn.setAdapter(spnAdapter);
+
+        //inicia os valores do dialog
+        spn.setSelection(calibragem.getTipo());//seta a posição inicial
+        titulo.setText(calibragem.getTitulo());
+        descricao.setText(calibragem.getDescricao());
+        audio.setText(calibragem.getAudio().toString());
+        video.setText(calibragem.getVideo().toString());
+
+        btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (TextUtils.isEmpty(titulo.getText().toString())) {
+                    Toast.makeText(context, "Você precisa especificar o titulo", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (spn.getSelectedItemPosition() == 0) {
+                    Toast.makeText(context, "Você precisa especificar o Instrumento", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(audio.getText().toString())) {
+                    Toast.makeText(context, "Você precisa especificar o valor do Audio", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(video.getText().toString())) {
+                    Toast.makeText(context, "Você precisa especificar o valor do Video", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                dialog.dismiss();
+
+                Calibragem calibragem_nova = new Calibragem.Builder()
+                        .withId(calibragem.getId())
+                        .withVideo(Integer.valueOf(video.getText().toString()))
+                        .withTitulo(titulo.getText().toString())
+                        .withDispositivo(dispositivo)
+                        .withDescricao(descricao.getText().toString())
+                        .withAudio(Integer.valueOf(audio.getText().toString()))
+                        .withUltimaAtualizacao(new Date())
+                        .withTipo(spn.getSelectedItemPosition())
+                        .build();
+
+                daoCalibragem = new DAOCalibragem(context);
+                calibragem_nova = daoCalibragem.buscar(new Long(calibragem_nova.getId()), dispositivo);
+                DatabaseManager.getInstance().closeDatabase();
+
+                Log.i("CALIBRAGEM", "CALIBRAGEM: " + calibragem_nova.toString());
+
+                for (int i = 0; i < calibragens.size(); i++) {
+                    if (calibragens.get(i).getId().equals(calibragem.getId())) {
+                        calibragens.set(i, calibragem_nova);
+                        break;
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+
+                U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
             }
         });
 

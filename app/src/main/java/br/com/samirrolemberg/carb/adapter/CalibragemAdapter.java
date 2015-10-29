@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.samirrolemberg.carb.CalibragemActivity;
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
@@ -33,9 +34,12 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private List<Calibragem> itens;
 
-    public CalibragemAdapter(List<Calibragem> itens) {
+    private CalibragemActivity activity;
+
+    public CalibragemAdapter(List<Calibragem> itens, CalibragemActivity activity) {
         super();
         this.itens=itens;
+        this.activity = activity;
     }
 
     @Override
@@ -66,12 +70,14 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         final PopupMenu popupMenu = new PopupMenu(holder.btnMenuCalibragem.getContext(), holder.btnMenuCalibragem);
         popupMenu.inflate(R.menu.menu_adapter_calibragem);
 
+        //click no botão do menu
         holder.btnMenuCalibragem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupMenu.show();
             }
         });
+        //long click no botão do menu
         holder.btnMenuCalibragem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -79,6 +85,14 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return false;
             }
         });
+        //click no cartão
+        holder.layCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.exibirDialog(activity, itens.get(position));
+            }
+        });
+        //long click no cartão
         holder.layCard.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -91,7 +105,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if(item.getItemId() == R.id.menu_calibragem_editar){
-                    Toast.makeText(holder.btnMenuCalibragem.getContext(),"Click Menu Editar", Toast.LENGTH_LONG).show();
+                    activity.exibirDialog(activity, itens.get(position));
                     return true;
                 }
                 if(item.getItemId() == R.id.menu_calibragem_excluir){
