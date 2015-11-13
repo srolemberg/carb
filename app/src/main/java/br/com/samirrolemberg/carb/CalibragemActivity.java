@@ -97,7 +97,7 @@ public class CalibragemActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void exibirDialog(final Activity context){
+    private void exibirDialog(final Activity context){
         final View view = CalibragemActivity.this.getLayoutInflater().inflate(R.layout.dialog_add_calibragem, null);
 
         final Button btnPositive = (Button) view.findViewById(R.id.btnSalvarCalibragem);
@@ -143,15 +143,14 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
-                Calibragem calibragem = new Calibragem.Builder()
-                        .withVideo(Integer.valueOf(video.getText().toString()))
-                        .withTitulo(titulo.getText().toString())
-                        .withDispositivo(dispositivo)
-                        .withDescricao(descricao.getText().toString())
-                        .withAudio(Integer.valueOf(audio.getText().toString()))
-                        .withDataCriacao(new Date())
-                        .withTipo(spn.getSelectedItemPosition())
-                        .build();
+                Calibragem calibragem = new Calibragem();
+                        calibragem.setVideo(Integer.valueOf(video.getText().toString()));
+                        calibragem.setTitulo(titulo.getText().toString());
+                        calibragem.setDispositivo(dispositivo);
+                        calibragem.setDescricao(descricao.getText().toString());
+                        calibragem.setAudio(Integer.valueOf(audio.getText().toString()));
+                        calibragem.setDataCriacao(new Date());
+                        calibragem.setTipo(spn.getSelectedItemPosition());
 
                 daoCalibragem = new DAOCalibragem(context);
                 calibragem = daoCalibragem.buscar(daoCalibragem.inserir(calibragem, dispositivo.getId()), dispositivo);
@@ -232,29 +231,12 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
-                Calibragem calibragem_nova = new Calibragem.Builder()
-                        .withId(calibragem.getId())
-                        .withVideo(Integer.valueOf(video.getText().toString()))
-                        .withTitulo(titulo.getText().toString())
-                        .withDispositivo(dispositivo)
-                        .withDescricao(descricao.getText().toString())
-                        .withAudio(Integer.valueOf(audio.getText().toString()))
-                        .withUltimaAtualizacao(new Date())
-                        .withTipo(spn.getSelectedItemPosition())
-                        .build();
-
-                daoCalibragem = new DAOCalibragem(context);
-                calibragem_nova = daoCalibragem.buscar(new Long(calibragem_nova.getId()), dispositivo);
-                DatabaseManager.getInstance().closeDatabase();
-
-                Log.i("CALIBRAGEM", "CALIBRAGEM: " + calibragem_nova.toString());
-
-                for (int i = 0; i < calibragens.size(); i++) {
-                    if (calibragens.get(i).getId().equals(calibragem.getId())) {
-                        calibragens.set(i, calibragem_nova);
-                        break;
-                    }
-                }
+                        calibragem.setVideo(Integer.valueOf(video.getText().toString()));
+                        calibragem.setTitulo(titulo.getText().toString());
+                        calibragem.setDescricao(descricao.getText().toString());
+                        calibragem.setAudio(Integer.valueOf(audio.getText().toString()));
+                        calibragem.setUltimaAtualizacao(new Date());
+                        calibragem.setTipo(spn.getSelectedItemPosition());
 
                 adapter.notifyDataSetChanged();
 

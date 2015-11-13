@@ -48,17 +48,16 @@ public class DAOCalibragem extends DAO{
 			sql.append("select * from "+TABLE+" where id = ?");
 			Cursor cursor = database.rawQuery(sql.toString(), args);
 			if (cursor.moveToNext()) {
-				calibragem = new Calibragem.Builder()
-						.withId(cursor.getInt(cursor.getColumnIndex("id")))
-						.withTipo(cursor.getInt(cursor.getColumnIndex("tipo")))
-						.withTitulo(cursor.getString(cursor.getColumnIndex("titulo")))
-						.withDescricao(cursor.getString(cursor.getColumnIndex("descricao")))
-						.withAudio(cursor.getInt(cursor.getColumnIndex("audio")))
-						.withVideo(cursor.getInt(cursor.getColumnIndex("video")))
-						.withDispositivo(dis)
-						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
-						.withUltimaAtualizacao(new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))))
-						.build();
+				calibragem = new Calibragem();
+						calibragem.setId(cursor.getInt(cursor.getColumnIndex("id")));
+						calibragem.setTipo(cursor.getInt(cursor.getColumnIndex("tipo")));
+						calibragem.setTitulo(cursor.getString(cursor.getColumnIndex("titulo")));
+						calibragem.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
+						calibragem.setAudio(cursor.getInt(cursor.getColumnIndex("audio")));
+						calibragem.setVideo(cursor.getInt(cursor.getColumnIndex("video")));
+						calibragem.setDispositivo(dis);
+						calibragem.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
+						calibragem.setUltimaAtualizacao(new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))));
 			}
 			cursor.close();
 		} catch (Exception e) {
@@ -75,16 +74,15 @@ public class DAOCalibragem extends DAO{
 			sql.append("select * from "+TABLE+" where idDispositivo = ? order by dataCriacao asc");
 			Cursor cursor = database.rawQuery(sql.toString(), args);
 			while (cursor.moveToNext()) {
-				Calibragem calibragem = new Calibragem.Builder()
-						.withAudio(cursor.getInt(cursor.getColumnIndex("audio")))
-						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
-						.withDescricao(cursor.getString(cursor.getColumnIndex("descricao")))
-						.withDispositivo(dispositivo)
-						.withId(cursor.getInt(cursor.getColumnIndex("id")))
-						.withTipo(cursor.getInt(cursor.getColumnIndex("tipo")))
-						.withTitulo(cursor.getString(cursor.getColumnIndex("titulo")))
-						.withVideo(cursor.getInt(cursor.getColumnIndex("video")))
-						.build();
+				Calibragem calibragem = new Calibragem();
+						calibragem.setAudio(cursor.getInt(cursor.getColumnIndex("audio")));
+						calibragem.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
+						calibragem.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
+						calibragem.setDispositivo(dispositivo);
+						calibragem.setId(cursor.getInt(cursor.getColumnIndex("id")));
+						calibragem.setTipo(cursor.getInt(cursor.getColumnIndex("tipo")));
+						calibragem.setTitulo(cursor.getString(cursor.getColumnIndex("titulo")));
+						calibragem.setVideo(cursor.getInt(cursor.getColumnIndex("video")));
 
 				calibragens.add(calibragem);
 			}

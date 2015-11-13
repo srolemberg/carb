@@ -43,12 +43,11 @@ public class DAODispositivo extends DAO{
             sql.append("select * from "+TABLE+" where id = ?");
             Cursor cursor = database.rawQuery(sql.toString(), args);
             if (cursor.moveToNext()) {
-                dispositivo = new Dispositivo.Builder()
-                        .withId(cursor.getInt(cursor.getColumnIndex("id")))
-						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
-						.withNome(cursor.getString(cursor.getColumnIndex("nome")))
-						.withTipo(cursor.getInt(cursor.getColumnIndex("tipo")))
-						.build();
+                dispositivo = new Dispositivo();
+                        dispositivo.setId(cursor.getInt(cursor.getColumnIndex("id")));
+						dispositivo.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
+						dispositivo.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+						dispositivo.setTipo(cursor.getInt(cursor.getColumnIndex("tipo")));
             }
             cursor.close();
         } catch (Exception e) {
@@ -76,13 +75,12 @@ public class DAODispositivo extends DAO{
 			Cursor cursor = database.rawQuery(sql.toString(), null);
 			while (cursor.moveToNext()) {
 
-				Dispositivo dispositivo = new Dispositivo.Builder()
-						.withId(cursor.getInt(cursor.getColumnIndex("id")))
-						.withDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))))
-						.withNome(cursor.getString(cursor.getColumnIndex("nome")))
-						.withTipo(cursor.getInt(cursor.getColumnIndex("tipo")))
-						.build();
-				
+				Dispositivo dispositivo = new Dispositivo();
+						dispositivo.setId(cursor.getInt(cursor.getColumnIndex("id")));
+						dispositivo.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
+						dispositivo.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+						dispositivo.setTipo(cursor.getInt(cursor.getColumnIndex("tipo")));
+
 				dispositivos.add(dispositivo);
 			}
 			cursor.close();

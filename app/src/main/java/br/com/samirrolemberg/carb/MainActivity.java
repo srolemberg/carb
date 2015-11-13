@@ -117,11 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
-                Dispositivo dispositivo = new Dispositivo.Builder()
-                        .withNome(nome.getText().toString())
-                        .withDataCriacao(new Date())
-                        .withTipo(spn.getSelectedItemPosition())
-                        .build();
+                Dispositivo dispositivo = new Dispositivo();
+                        dispositivo.setNome(nome.getText().toString());
+                        dispositivo.setDataCriacao(new Date());
+                        dispositivo.setTipo(spn.getSelectedItemPosition());
 
                 daoDispositivo = new DAODispositivo(context);
                 dispositivo = daoDispositivo.buscar(daoDispositivo.inserir(dispositivo));

@@ -16,95 +16,79 @@ public class Dispositivo implements Serializable {
     private Integer tipo;
     private List<Calibragem> calibragens;
 
-    private Dispositivo(Builder builder) {
-        id = builder.id;
-        nome = builder.nome;
-        dataCriacao = builder.dataCriacao;
-        ultimaAtualizacao = builder.ultimaAtualizacao;
-        tipo = builder.tipo;
-        calibragens = builder.calibragens;
+
+    public Dispositivo() {
+        super();
+    }
+
+    public Dispositivo(Integer id, String nome, Date dataCriacao, Date ultimaAtualizacao, Integer tipo, List<Calibragem> calibragens) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.dataCriacao = dataCriacao;
+        this.ultimaAtualizacao = ultimaAtualizacao;
+        this.tipo = tipo;
+        this.calibragens = calibragens;
     }
 
     @Override
     public String toString() {
-        return "Dispositivo{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataCriacao=" + dataCriacao +
-                ", ultimaAtualizacao=" + ultimaAtualizacao +
-                ", tipo=" + tipo +
-                ", calibragens=" + calibragens +
-                '}';
+        final StringBuffer sb = new StringBuffer("Dispositivo{");
+        sb.append("id=").append(id);
+        sb.append(", nome='").append(nome).append('\'');
+        sb.append(", dataCriacao=").append(dataCriacao);
+        sb.append(", ultimaAtualizacao=").append(ultimaAtualizacao);
+        sb.append(", tipo=").append(tipo);
+        sb.append(", calibragens=").append(calibragens);
+        sb.append('}');
+        return sb.toString();
     }
 
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Date getDataCriacao() {
         return dataCriacao;
     }
 
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
     public Date getUltimaAtualizacao() {
         return ultimaAtualizacao;
+    }
+
+    public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+        this.ultimaAtualizacao = ultimaAtualizacao;
     }
 
     public Integer getTipo() {
         return tipo;
     }
 
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
+
     public List<Calibragem> getCalibragens() {
         return calibragens;
     }
 
-
-    public static final class Builder {
-        private Integer id;
-        private String nome;
-        private Date dataCriacao;
-        private Date ultimaAtualizacao;
-        private Integer tipo;
-        private List<Calibragem> calibragens;
-
-        public Builder() {
-        }
-
-        public Builder withId(Integer val) {
-            id = val;
-            return this;
-        }
-
-        public Builder withNome(String val) {
-            nome = val;
-            return this;
-        }
-
-        public Builder withDataCriacao(Date val) {
-            dataCriacao = val;
-            return this;
-        }
-
-        public Builder withUltimaAtualizacao(Date val) {
-            ultimaAtualizacao = val;
-            return this;
-        }
-
-        public Builder withTipo(Integer val) {
-            tipo = val;
-            return this;
-        }
-
-        public Builder withCalibragens(List<Calibragem> val) {
-            calibragens = val;
-            return this;
-        }
-
-        public Dispositivo build() {
-            return new Dispositivo(this);
-        }
+    public void setCalibragens(List<Calibragem> calibragens) {
+        this.calibragens = calibragens;
     }
 }
