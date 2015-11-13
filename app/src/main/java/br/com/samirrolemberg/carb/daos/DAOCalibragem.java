@@ -31,6 +31,7 @@ public class DAOCalibragem extends DAO{
 		values.put("descricao", calibragem.getDescricao());
 		values.put("titulo", calibragem.getTitulo());
 		values.put("dataCriacao", calibragem.getDataCriacao()==null?null:calibragem.getDataCriacao().getTime());
+		values.put("ultimaAtualizacao", calibragem.getUltimaAtualizacao()==null?null:calibragem.getUltimaAtualizacao().getTime());
 		values.put("tipo", calibragem.getTipo());
 		values.put("idDispositivo", idDispositivo);
 
@@ -56,8 +57,8 @@ public class DAOCalibragem extends DAO{
 						calibragem.setAudio(cursor.getInt(cursor.getColumnIndex("audio")));
 						calibragem.setVideo(cursor.getInt(cursor.getColumnIndex("video")));
 						calibragem.setDispositivo(dis);
-						calibragem.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
-						calibragem.setUltimaAtualizacao(new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))));
+						calibragem.setDataCriacao(cursor.getLong(cursor.getColumnIndex("dataCriacao")) > 0 ? new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))) : null);
+						calibragem.setUltimaAtualizacao( cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao")) > 0 ? new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))) : null );
 			}
 			cursor.close();
 		} catch (Exception e) {
@@ -76,13 +77,14 @@ public class DAOCalibragem extends DAO{
 			while (cursor.moveToNext()) {
 				Calibragem calibragem = new Calibragem();
 						calibragem.setAudio(cursor.getInt(cursor.getColumnIndex("audio")));
-						calibragem.setDataCriacao(new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))));
 						calibragem.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
 						calibragem.setDispositivo(dispositivo);
 						calibragem.setId(cursor.getInt(cursor.getColumnIndex("id")));
 						calibragem.setTipo(cursor.getInt(cursor.getColumnIndex("tipo")));
 						calibragem.setTitulo(cursor.getString(cursor.getColumnIndex("titulo")));
 						calibragem.setVideo(cursor.getInt(cursor.getColumnIndex("video")));
+						calibragem.setDataCriacao(cursor.getLong(cursor.getColumnIndex("dataCriacao")) > 0 ? new Date(cursor.getLong(cursor.getColumnIndex("dataCriacao"))) : null);
+						calibragem.setUltimaAtualizacao( cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao")) > 0 ? new Date(cursor.getLong(cursor.getColumnIndex("ultimaAtualizacao"))) : null );
 
 				calibragens.add(calibragem);
 			}
@@ -124,7 +126,7 @@ public class DAOCalibragem extends DAO{
 		values.put("video", calibragem.getVideo());
 		values.put("descricao", calibragem.getDescricao());
 		values.put("titulo", calibragem.getTitulo());
-		values.put("ultimaAtualizacao", calibragem.getUltimaAtualizacao()==null?null:calibragem.getUltimaAtualizacao().getTime());
+		values.put("ultimaAtualizacao", calibragem.getUltimaAtualizacao().getTime());
 		values.put("tipo", calibragem.getTipo());
 
 		String[] args = {calibragem.getId()+""};

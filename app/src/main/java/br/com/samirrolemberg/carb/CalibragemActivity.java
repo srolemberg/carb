@@ -239,7 +239,13 @@ public class CalibragemActivity extends AppCompatActivity {
                         calibragem.setTipo(spn.getSelectedItemPosition());
 
                 adapter.notifyDataSetChanged();
+                
 
+                daoCalibragem = new DAOCalibragem(context);
+                daoCalibragem.atualiza(calibragem);
+                Log.i("ATUALIZAÇÃO","CALIBRAGEM: "+calibragem.toString());
+                DatabaseManager.getInstance().closeDatabase();
+                
                 U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
             }
         });

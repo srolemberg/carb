@@ -60,7 +60,14 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         //if (getItemViewType(position)!=0) {}else{}
         final HolderDispositivo holder = (HolderDispositivo) paramVH;
 
-        holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+
+        if(itens.get(position).getUltimaAtualizacao() == null){
+            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+        }else{
+            holder.tvLabelDataCriacao.setText("Atualizado em: ");
+            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
+        }
+
         holder.tvVideo.setText(itens.get(position).getVideo().toString());
         holder.tvAudio.setText(itens.get(position).getAudio().toString());
         holder.tvDescricao.setText(itens.get(position).getDescricao());
@@ -137,6 +144,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return false;
             }
         });
+
     }
 
     @Override
@@ -156,7 +164,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class HolderDispositivo extends RecyclerView.ViewHolder{
 
-        protected TextView tvTitulo, tvDescricao, tvAudio, tvVideo, tvDataCriacao;
+        protected TextView tvTitulo, tvDescricao, tvAudio, tvVideo, tvDataCriacao, tvLabelDataCriacao;
         protected ImageView ivTipo;
         protected CardView layCard;
         protected Button btnMenuCalibragem;
@@ -170,6 +178,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvAudio = (TextView) v.findViewById(R.id.tvValorAudio);
             tvVideo = (TextView) v.findViewById(R.id.tvValorVideo);
             tvDataCriacao = (TextView) v.findViewById(R.id.tvDataCriacao);
+            tvLabelDataCriacao = (TextView) v.findViewById(R.id.tvLabelDataCriacao);
             btnMenuCalibragem = (Button) v.findViewById(R.id.btnMenuCalibragem);
         }
 
