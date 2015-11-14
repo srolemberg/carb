@@ -19,6 +19,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.BaseViewAnimator;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
@@ -108,10 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 EditText nome = (EditText) view.findViewById(R.id.etNomeDispositivo);
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(nome);
                     return;
                 }
 
@@ -180,10 +185,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(nome);
                     return;
                 }
 

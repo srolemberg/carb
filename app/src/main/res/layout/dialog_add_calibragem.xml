@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/inputTituloCalibragem"
@@ -18,9 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/etTituloCalibragem"
-            android:hint="Título"
+            android:hint="@string/hint_titulo"
             android:inputType="textPersonName"
-            android:maxLength="15"/>
+            android:maxLength="15"
+            android:imeOptions="actionNext"
+            android:imeActionId="@+id/etDescricaoCalibragem"
+            />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/inputDescricaoCalibragem"
@@ -34,10 +37,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/etDescricaoCalibragem"
-            android:hint="Descrição"
+            android:hint="@string/hint_descricao"
             android:inputType="textMultiLine|textPersonName"
             android:maxLength="60"
             android:maxLines="2"
+            android:imeOptions="actionNext"
+            android:imeActionId="@+id/etAudioCalibragem"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -67,9 +72,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/etAudioCalibragem"
-                android:hint="Audio"
+                android:hint="@string/hint_audio"
                 android:inputType="numberSigned"
-                android:maxLength="4"/>
+                android:maxLength="4"
+                android:imeOptions="actionNext"
+                android:imeActionId="@+id/etVideoCalibragem"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -82,16 +90,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/etVideoCalibragem"
-                android:hint="Video"
+                android:hint="@string/hint_video"
                 android:inputType="numberSigned"
-                android:maxLength="4"/>
+                android:maxLength="4"
+                android:imeOptions="actionDone"
+                />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salvar"
+        android:text="@string/salvar"
         android:id="@+id/btnSalvarCalibragem"
         style="?buttonBarPositiveButtonStyle"
         android:layout_below="@+id/linearLayout"
@@ -102,7 +112,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:id="@+id/btnCancelarCalibragem"
         style="?buttonBarNegativeButtonStyle"
         android:layout_below="@+id/linearLayout"

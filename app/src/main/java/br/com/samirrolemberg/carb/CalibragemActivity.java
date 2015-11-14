@@ -21,6 +21,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -126,18 +129,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(video);
                     return;
                 }
 
@@ -214,18 +221,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
+                    YoYo.with(Techniques.Swing).duration(350).playOn(video);
                     return;
                 }
 

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="instrumentos_array">
-        <item>Instrumento...</item>
-        <item>Guitarra</item>
-        <item>Guitarra Pro</item>
-        <item>Baixo</item>
-        <item>Baixo Pro</item>
-        <item>Bateria</item>
-        <item>Bateria Avançado</item>
-        <item>Bateria Pro</item>
-        <item>Vocal</item>
-        <item>Vocal Grupo</item>
-        <item>Teclado</item>
-        <item>Teclado Avançado</item>
-        <item>Teclado Pro</item>
-        <item>Controle</item>
-        <item>Tapede Dança</item>
-        <item>Teclado PC</item>
+        <item>@string/array_instrumento___</item>
+        <item>@string/array_guitarra</item>
+        <item>@string/array_guitarra_pro</item>
+        <item>@string/array_baixo</item>
+        <item>@string/array_baixo_pro</item>
+        <item>@string/array_bateria</item>
+        <item>@string/array_bateria_avancada</item>
+        <item>@string/array_bateria_pro</item>
+        <item>@string/array_vocal</item>
+        <item>@string/array_vocal_grupo</item>
+        <item>@string/array_teclado</item>
+        <item>@string/array_teclado_avancado</item>
+        <item>@string/array_teclado_pro</item>
+        <item>@string/array_controle</item>
+        <item>@string/array_tapete_danca</item>
+        <item>@string/array_teclado_pc</item>
     </string-array>
 
 </resources>

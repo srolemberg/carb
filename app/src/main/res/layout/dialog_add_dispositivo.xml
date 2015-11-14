@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/etNomeDispositivo"
-                android:hint="Nome do Dispositivo"
+                android:hint="@string/hint_nome_dispositivo"
                 android:inputType="textPersonName"
                 android:maxLength="15"
                 android:singleLine="true"/>
@@ -40,7 +41,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continuar"
+        android:text="@string/continuar"
         android:id="@+id/btnSalvarDispositivo"
         style="?buttonBarPositiveButtonStyle"
         android:layout_below="@+id/linearLayout"
@@ -51,7 +52,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:id="@+id/btnCancelarDispositivo"
         style="?buttonBarNegativeButtonStyle"
         android:layout_below="@+id/linearLayout"

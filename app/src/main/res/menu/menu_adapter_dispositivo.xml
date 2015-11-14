@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/menu_dispositivo_detalhes"
-        android:title="Detalhes"
+        android:title="@string/menu_detalhes"
         android:orderInCategory="1"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/menu_dispositivo_editar"
-        android:title="Editar"
+        android:title="@string/menu_editar"
         android:orderInCategory="2"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/menu_dispositivo_excluir"
-        android:title="Excluir"
+        android:title="@string/menu_excluir"
         android:orderInCategory="3"
         app:showAsAction="never"
         />
