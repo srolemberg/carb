@@ -38,7 +38,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public CalibragemAdapter(List<Calibragem> itens, CalibragemActivity activity) {
         super();
-        this.itens=itens;
+        this.itens = itens;
         this.activity = activity;
     }
 
@@ -64,7 +64,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if(itens.get(position).getUltimaAtualizacao() == null){
             holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
         }else{
-            holder.tvLabelDataCriacao.setText("Atualizado em: ");
+            holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
             holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
 
@@ -117,10 +117,10 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
                 if(item.getItemId() == R.id.menu_calibragem_excluir){
                     AlertDialog alertDialog = new AlertDialog.Builder(holder.layCard.getContext())
-                            .setTitle("Excluir")
-                            .setMessage("Deseja realmente excluir o item: '" + itens.get(position).getTitulo() + "' ?")
+                            .setTitle(activity.getString(R.string.excluir))
+                            .setMessage(activity.getString(R.string.dialog_msg_excluir_item) + itens.get(position).getTitulo() + "' ?")
                             .setCancelable(true)
-                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(activity.getString(R.string.sim), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //remove todas as calibragens de um dispositivo
@@ -134,7 +134,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                     dialog.dismiss();
                                 }
                             })
-                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(activity.getString(R.string.nao), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();

@@ -56,14 +56,14 @@ public class DAODispositivo extends DAO{
         return dispositivo;
     }
 
-	public int atualiza(Dispositivo dispositivo, int id){
+	public int atualiza(Dispositivo dispositivo){
 		ContentValues values = new ContentValues();
 		values.put("id", dispositivo.getId());
 		values.put("nome", dispositivo.getNome());
-		values.put("dataCriacao", dispositivo.getDataCriacao()==null?null:dispositivo.getDataCriacao().getTime());
+		values.put("ultimaAtualizacao", dispositivo.getUltimaAtualizacao().getTime());
 		values.put("tipo", dispositivo.getTipo());
 
-		String[] args = {id+""};
+		String[] args = {dispositivo.getId().toString()+""};
 		return database.update(TABLE, values, "id=?", args);
 	}
 

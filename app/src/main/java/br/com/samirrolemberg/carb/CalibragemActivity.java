@@ -58,7 +58,7 @@ public class CalibragemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibragem);
 
-        dispositivo = (Dispositivo) getIntent().getSerializableExtra("dispositivo");
+        dispositivo = (Dispositivo) getIntent().getSerializableExtra(getString(R.string.constante_dispositivo));
 
         calibragens = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class CalibragemActivity extends AppCompatActivity {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .setView(view)
-                .setTitle("Informe os dados do Instrumento")
+                .setTitle(getString(R.string.calibragem_act_dialog_titulo))
                 .create();
 
         final Spinner spn = (Spinner) view.findViewById(R.id.spnInstrumento);
@@ -125,19 +125,19 @@ public class CalibragemActivity extends AppCompatActivity {
                 EditText video = (EditText) view.findViewById(R.id.etVideoCalibragem);
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o titulo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
-                    Toast.makeText(context, "Você precisa especificar o Instrumento", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o valor do Audio", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o valor do Video", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -191,7 +191,7 @@ public class CalibragemActivity extends AppCompatActivity {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .setView(view)
-                .setTitle("Modifique os dados do Instrumento")
+                .setTitle(getString(R.string.calibragem_act_dialog_titulo_editar))
                 .create();
 
         final Spinner spn = (Spinner) view.findViewById(R.id.spnInstrumento);
@@ -213,37 +213,36 @@ public class CalibragemActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o titulo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
-                    Toast.makeText(context, "Você precisa especificar o Instrumento", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o valor do Audio", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o valor do Video", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 dialog.dismiss();
 
-                        calibragem.setVideo(Integer.valueOf(video.getText().toString()));
-                        calibragem.setTitulo(titulo.getText().toString());
-                        calibragem.setDescricao(descricao.getText().toString());
-                        calibragem.setAudio(Integer.valueOf(audio.getText().toString()));
-                        calibragem.setUltimaAtualizacao(new Date());
-                        calibragem.setTipo(spn.getSelectedItemPosition());
+                calibragem.setVideo(Integer.valueOf(video.getText().toString()));
+                calibragem.setTitulo(titulo.getText().toString());
+                calibragem.setDescricao(descricao.getText().toString());
+                calibragem.setAudio(Integer.valueOf(audio.getText().toString()));
+                calibragem.setUltimaAtualizacao(new Date());
+                calibragem.setTipo(spn.getSelectedItemPosition());
 
                 adapter.notifyDataSetChanged();
                 
 
                 daoCalibragem = new DAOCalibragem(context);
                 daoCalibragem.atualiza(calibragem);
-                Log.i("ATUALIZAÇÃO","CALIBRAGEM: "+calibragem.toString());
                 DatabaseManager.getInstance().closeDatabase();
                 
                 U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);

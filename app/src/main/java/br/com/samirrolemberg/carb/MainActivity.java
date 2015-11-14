@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         dispositivos = daoDispositivo.listarTudo();
         DatabaseManager.getInstance().closeDatabase();
 
-        adapter = new DispositivoAdapter(dispositivos);
+        adapter = new DispositivoAdapter(dispositivos, MainActivity.this);
 
         rvDispositivo = (RecyclerView) findViewById(R.id.rvDispositivos);
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .setView(view)
-                .setTitle("Informe o Dispositivo que será configurado. Ex: Tv da Sala")
+                .setTitle(getString(R.string.main_act_dialog_titulo))
                 .create();
 
 
@@ -107,20 +107,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText nome = (EditText) view.findViewById(R.id.etNomeDispositivo);
                 if (spn.getSelectedItemPosition() == 0) {
-                    Toast.makeText(context, "Você precisa especificar o Instrumento", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
-                    Toast.makeText(context, "Você precisa especificar o nome do dispositivo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 dialog.dismiss();
 
                 Dispositivo dispositivo = new Dispositivo();
-                        dispositivo.setNome(nome.getText().toString());
-                        dispositivo.setDataCriacao(new Date());
-                        dispositivo.setTipo(spn.getSelectedItemPosition());
+                dispositivo.setNome(nome.getText().toString());
+                dispositivo.setDataCriacao(new Date());
+                dispositivo.setTipo(spn.getSelectedItemPosition());
 
                 daoDispositivo = new DAODispositivo(context);
                 dispositivo = daoDispositivo.buscar(daoDispositivo.inserir(dispositivo));
@@ -129,12 +129,76 @@ public class MainActivity extends AppCompatActivity {
                 dispositivos.add(dispositivo);
 
                 Intent intent = new Intent(context, CalibragemActivity.class);
-                intent.putExtra("dispositivo", dispositivo);
+                intent.putExtra(getString(R.string.constante_dispositivo), dispositivo);
                 startActivity(intent);
 
                 adapter.notifyDataSetChanged();
 
                 rvDispositivo.smoothScrollToPosition(adapter.getItemCount());
+            }
+        });
+
+        btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public void exibirDialog(final Activity context, final Dispositivo dispositivo){
+        final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_add_dispositivo, null);
+
+        final Button btnPositive = (Button) view.findViewById(R.id.btnSalvarDispositivo);
+        final Button btnNegative = (Button) view.findViewById(R.id.btnCancelarDispositivo);
+        final EditText nome = (EditText) view.findViewById(R.id.etNomeDispositivo);
+
+
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .setView(view)
+                .setTitle(getString(R.string.main_act_dialog_titulo_editar))
+                .create();
+
+
+        final Spinner spn = (Spinner) view.findViewById(R.id.spnDispositivo);
+        ArrayAdapter<CharSequence> spnAdapter = ArrayAdapter.createFromResource(context,
+                R.array.dispositivos_array, android.R.layout.simple_spinner_item);
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spn.setAdapter(spnAdapter);
+
+        //inicia os valores do dialog
+        spn.setSelection(dispositivo.getTipo());//seta a posição inicial
+        nome.setText(dispositivo.getNome());
+
+
+        btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (spn.getSelectedItemPosition() == 0) {
+                    Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(nome.getText().toString())) {
+                    Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                dialog.dismiss();
+
+                dispositivo.setNome(nome.getText().toString());
+                dispositivo.setUltimaAtualizacao(new Date());
+                dispositivo.setTipo(spn.getSelectedItemPosition());
+
+                daoDispositivo = new DAODispositivo(context);
+                daoDispositivo.atualiza(dispositivo);
+                DatabaseManager.getInstance().closeDatabase();
+
+                adapter.notifyDataSetChanged();
+
             }
         });
 

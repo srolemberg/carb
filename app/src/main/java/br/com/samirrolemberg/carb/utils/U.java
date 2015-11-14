@@ -89,13 +89,13 @@ public class U {
 		if(sumAudio != 0){
 			double audio = sumAudio/calibragens.size();
 			if(isToolbar){
-				tvaudio.setText("Audio > "+audio+" ms");
+				tvaudio.setText(C.getContext().getString(R.string.audio_til__) + audio + C.getContext().getString(R.string._ms));
 			}else{
 				tvaudio.setText(audio+"");
 			}
 		}else{
 			if(isToolbar){
-				tvaudio.setText("Audio > "+"0"+" ms");
+				tvaudio.setText(C.getContext().getString(R.string.audio_til__)+"0"+ C.getContext().getString(R.string._ms));
 			}else{
 				tvaudio.setText("0");
 			}
@@ -104,13 +104,13 @@ public class U {
 		if(sumVideo != 0){
 			double video = sumVideo/calibragens.size();
 			if(isToolbar){
-				tvvideo.setText("Video > "+video+" ms");
+				tvvideo.setText(C.getContext().getString(R.string.video_til__)+video+C.getContext().getString(R.string._ms));
 			}else{
 				tvvideo.setText(video+"");
 			}
 		}else{
 			if(isToolbar){
-				tvvideo.setText("Video > "+"0"+" ms");
+				tvvideo.setText(C.getContext().getString(R.string.video_til__)+"0"+C.getContext().getString(R.string._ms));
 			}else{
 				tvvideo.setText("0");
 			}

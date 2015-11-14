@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">CARB</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuração</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="title_activity_calibragem">CalibragemActivity</string>
+    <string name="main_act_dialog_titulo">Informe o Dispositivo que será configurado. Ex: Tv da Sala</string>
+    <string name="main_act_dialog_erro_spinner">Você precisa especificar o Instrumento</string>
+    <string name="main_act_dialog_erro_nome">Você precisa especificar o nome do dispositivo</string>
+    <string name="main_act_dialog_titulo_editar">Modifique o Dispositivo configurado.</string>
+    <string name="calibragem_act_dialog_titulo">Informe os dados do Instrumento</string>
+    <string name="calibragem_act_dialog_erro_titulo">Você precisa especificar o titulo</string>
+    <string name="calibragem_act_dialog_erro_spinner">Você precisa especificar o Instrumento</string>
+    <string name="calibragem_act_dialog_erro_audio">Você precisa especificar o valor do Audio</string>
+    <string name="calibragem_act_dialog_erro_video">Você precisa especificar o valor do Video</string>
+    <string name="calibragem_act_dialog_titulo_editar">Modifique os dados do Instrumento</string>
+    <string name="atualizado_em__">"Atualizado em: "</string>
+    <string name="excluir">Excluir</string>
+    <string name="dialog_msg_excluir_item">Deseja realmente excluir o item: \'</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="audio_til__">"Audio ~ "</string>
+    <string name="_ms">" ms"</string>
+    <string name="video_til__">"Video ~ "</string>
+    <string name="constante_dispositivo">dispositivo</string>
 </resources>

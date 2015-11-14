@@ -34,11 +34,12 @@ import br.com.samirrolemberg.carb.utils.U;
 public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Dispositivo> itens;
-    //private MainActivity activity;
+    private MainActivity activity;
 
-    public DispositivoAdapter(List<Dispositivo> itens) {
+    public DispositivoAdapter(List<Dispositivo> itens, MainActivity activity) {
         super();
-        this.itens=itens;
+        this.itens = itens;
+        this.activity = activity;
     }
 
     @Override
@@ -61,13 +62,22 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         holder.tvNome.setText(itens.get(position).getNome());
 
-        holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+        //holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), C.getContext()));
+
+        if(itens.get(position).getUltimaAtualizacao() == null){
+            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+        }else{
+            holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
+            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
+        }
+
+
         U.atualizaMedia(
                 (new DAOCalibragem(C.getContext())).listarTudo(itens.get(position)),
                 holder.tvAudio,
                 holder.tvVideo,
                 false);
-        DatabaseManager.getInstance().closeDatabase();
+
         holder.ivTipo.setImageDrawable(U.getDispositivo(itens.get(position).getTipo()));
 
 
@@ -115,15 +125,15 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     return true;
                 }
                 if (item.getItemId() == R.id.menu_dispositivo_editar) {
-                    Toast.makeText(holder.btnMenuDispositivo.getContext(), "Click Menu Editar", Toast.LENGTH_LONG).show();
+                    activity.exibirDialog(activity, itens.get(position));
                     return true;
                 }
                 if (item.getItemId() == R.id.menu_dispositivo_excluir) {
                     AlertDialog alertDialog = new AlertDialog.Builder(holder.layCard.getContext())
-                            .setTitle("Excluir")
-                            .setMessage("Deseja realmente excluir o item: '" + itens.get(position).getNome() + "' ?")
+                            .setTitle(activity.getString(R.string.excluir))
+                            .setMessage(activity.getString(R.string.dialog_msg_excluir_item) + itens.get(position).getNome() + "' ?")
                             .setCancelable(true)
-                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(activity.getString(R.string.sim), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //remove todas as calibragens de um dispositivo
@@ -145,7 +155,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                     dialog.dismiss();
                                 }
                             })
-                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(activity.getString(R.string.nao), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
@@ -177,7 +187,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public static class HolderDispositivo extends RecyclerView.ViewHolder{
 
         protected Button btnMenuDispositivo;
-        protected TextView tvNome, tvAudio, tvVideo, tvDataCriacao;
+        protected TextView tvNome, tvAudio, tvVideo, tvDataCriacao, tvLabelDataCriacao;
         protected ImageView ivTipo;
         protected CardView layCard;
 
@@ -191,6 +201,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tvAudio = (TextView) v.findViewById(R.id.tvValorAudio);
             tvVideo = (TextView) v.findViewById(R.id.tvValorVideo);
             tvDataCriacao = (TextView) v.findViewById(R.id.tvDataCriacao);
+            tvLabelDataCriacao = (TextView) v.findViewById(R.id.tvLabelDataCriacao);
         }
 
     }
