@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -238,12 +239,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_dispositivo_sobre_carb) {
-            Toast.makeText(MainActivity.this, "click Menu CARB", Toast.LENGTH_LONG).show();
-            C.getTracker().send(new HitBuilders.EventBuilder()
-                    .setCategory("Menu Principal")
-                    .setAction("Sobre CARB")
-                    .setLabel("abrir")
-                    .build());
+//            C.getTracker().send(new HitBuilders.EventBuilder()
+//                    .setCategory("Menu Principal")
+//                    .setAction("Sobre CARB")
+//                    .setLabel("abrir")
+//                    .build());
+
+
+            final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_sobre, null);
+
+            final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                    .setCancelable(true)
+                    .setView(view)
+                    .create();
+
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            dialog.show();
             return true;
         }
 
