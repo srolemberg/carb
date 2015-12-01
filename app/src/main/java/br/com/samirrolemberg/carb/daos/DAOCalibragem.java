@@ -17,6 +17,8 @@ import br.com.samirrolemberg.carb.model.Dispositivo;
 public class DAOCalibragem extends DAO{
 
 	public final static String TABLE = "calibragem";
+	public final static String TAG = "DAO"+DAOCalibragem.TABLE;
+
 	private SQLiteDatabase database = null;
 
 	public DAOCalibragem(Context context) {
@@ -62,7 +64,7 @@ public class DAOCalibragem extends DAO{
 			}
 			cursor.close();
 		} catch (Exception e) {
-			Log.i("DAOs", e.getLocalizedMessage(),e);
+			Log.i(TAG, e.getLocalizedMessage(),e);
 		}
 		return calibragem;
 	}
@@ -90,7 +92,7 @@ public class DAOCalibragem extends DAO{
 			}
 			cursor.close();
 		} catch (Exception e) {
-			Log.i("DAOs", e.getLocalizedMessage(),e);
+			Log.i(TAG, e.getLocalizedMessage(),e);
 		}
 		return calibragens;
 	}
@@ -107,7 +109,7 @@ public class DAOCalibragem extends DAO{
 			}
 			cursor.close();
 		} catch (Exception e) {
-			Log.i("DAOs", e.getLocalizedMessage(),e);
+			Log.i(TAG, e.getLocalizedMessage(),e);
 		}
 		
 		return resultado;
