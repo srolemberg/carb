@@ -133,7 +133,7 @@ public class U {
 				u = 1;
 			} else {
 				if (C.getContext().getResources().getDisplayMetrics().density > 3) {
-					u = 3;
+					u = 2;
 				} else {
 					u = 2;
 				}
