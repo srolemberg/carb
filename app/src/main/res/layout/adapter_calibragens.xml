@@ -70,7 +70,8 @@
                 android:id="@+id/tvLabelDataCriacao"
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/tvDataCriacao"
-                android:layout_toStartOf="@+id/tvDataCriacao" />
+                android:layout_toStartOf="@+id/tvDataCriacao"
+                android:layout_marginRight="4dp"/>
 
             <TextView
                 android:layout_width="wrap_content"

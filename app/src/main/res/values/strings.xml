@@ -13,7 +13,7 @@
     <string name="calibragem_act_dialog_erro_audio">Você precisa especificar o valor do Audio</string>
     <string name="calibragem_act_dialog_erro_video">Você precisa especificar o valor do Video</string>
     <string name="calibragem_act_dialog_titulo_editar">Modifique os dados do Instrumento</string>
-    <string name="atualizado_em__">"Atualizado em: "</string>
+    <string name="atualizado_em__">"Atualizado em:"</string>
     <string name="excluir">Excluir</string>
     <string name="dialog_msg_excluir_item">Deseja realmente excluir o item: \'</string>
     <string name="sim">Sim</string>

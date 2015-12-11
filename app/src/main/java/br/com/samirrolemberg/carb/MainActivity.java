@@ -13,14 +13,12 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.BaseViewAnimator;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.analytics.HitBuilders;
@@ -112,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 EditText nome = (EditText) view.findViewById(R.id.etNomeDispositivo);
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(nome);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(nome);
                     return;
                 }
 
@@ -186,12 +184,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(nome);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(nome);
                     return;
                 }
 

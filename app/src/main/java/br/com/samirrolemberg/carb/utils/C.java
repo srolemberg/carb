@@ -45,4 +45,6 @@ public class C extends Application{
     public static Tracker getTracker(){
         return tracker;
     }
+
+    public static final int DURACAO_ANIMACAO_TEXT_FIELD = 400;
 }

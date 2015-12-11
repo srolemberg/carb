@@ -1,18 +1,14 @@
 package br.com.samirrolemberg.carb;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -129,22 +125,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(video);
                     return;
                 }
 
@@ -221,22 +217,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(350).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(video);
                     return;
                 }
 
