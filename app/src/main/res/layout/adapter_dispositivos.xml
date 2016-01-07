@@ -1,171 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardDispositivo"
-        card_view:cardElevation="2dp"
-        card_view:cardCornerRadius="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-        <RelativeLayout
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="8dp">
 
-            <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:id="@+id/ivTipoDispositivo"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/instrument_guitar"
-                android:layout_marginRight="8dp"/>
-
-            <Button
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/btnMenuDispositivo"
-                style="?buttonBarNegativeButtonStyle"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:background="@drawable/ic_dots_vertical_black_24dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/nome_do_dispositivo"
-                android:id="@+id/tvNomeDispositivo"
-                android:maxLength="15"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:layout_alignTop="@+id/btnMenuDispositivo"
-                android:layout_toRightOf="@+id/ivTipoDispositivo"
-                android:layout_toLeftOf="@+id/btnMenuDispositivo" />
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/criado_em__"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:id="@+id/tvLabelDataCriacao"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/tvDataCriacao"
-                android:layout_toStartOf="@+id/tvDataCriacao"
-                android:layout_marginRight="4dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/mock_00_00_0000__00_00_00"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:id="@+id/tvDataCriacao"
-                android:layout_alignBottom="@+id/tvLabelDataCriacao"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/tvLabelDataCriacao"
-                android:layout_below="@+id/tvNomeDispositivo"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_toRightOf="@+id/ivTipoDispositivo"
-                android:layout_toEndOf="@+id/ivTipoDispositivo"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivTipoDispositivo"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/instrument_guitar" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/audio__"
-                        android:id="@+id/tvLabelAudio"
-                        />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/mock000000"
-                        android:id="@+id/tvValorAudio"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        />
+                        <TextView
+                            android:id="@+id/tvNomeDispositivo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@string/nome_do_dispositivo"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/_ms"
-                        android:singleLine="true"
-                        android:id="@+id/tvLabelMS1"
-                        />
+                        <Button
+                            android:id="@+id/btnMenuDispositivo"
+                            style="?buttonBarNegativeButtonStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_dots_vertical_black_24dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvLabelAudio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/audio__"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <TextView
+                                android:id="@+id/tvValorAudio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="@string/mock000000"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <TextView
+                                android:id="@+id/tvLabelMS1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="@string/_ms"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-                </LinearLayout>
+                        </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/video__"
-                        android:id="@+id/tvLabelVideo"
-                        />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/mock000000"
-                        android:id="@+id/tvValorVideo"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        />
+                            <TextView
+                                android:id="@+id/tvLabelVideo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/video__"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/_ms"
-                        android:singleLine="true"
-                        android:id="@+id/tvLabelMS2"
-                        />
+                            <TextView
+                                android:id="@+id/tvValorVideo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="@string/mock000000"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <TextView
+                                android:id="@+id/tvLabelMS2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="@string/_ms"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvLabelDataCriacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/criado_em__"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/tvDataCriacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/mock_00_00_0000__00_00_00"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

@@ -4,15 +4,8 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -128,7 +121,7 @@ public class U {
 			}else {
 				u = 1;
 			}
-		}else {
+		}else {//paisagem
 			if (C.getContext().getResources().getDisplayMetrics().density < 1.5) {
 				u = 1;
 			} else {

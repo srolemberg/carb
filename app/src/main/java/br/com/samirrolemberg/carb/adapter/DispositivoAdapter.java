@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -47,22 +46,11 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return itens.size();
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        if (position==0) {
-//            return 0;
-//        }else{
-//            return 1;
-//        }
-//    }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder paramVH, final int position) {
-        //if (getItemViewType(position)!=0) {}else{}
         final HolderDispositivo holder = (HolderDispositivo) paramVH;
 
         holder.tvNome.setText(itens.get(position).getNome());
-
-        //holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), C.getContext()));
 
         if(itens.get(position).getUltimaAtualizacao() == null){
             holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
@@ -71,7 +59,6 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
 
-
         U.atualizaMedia(
                 (new DAOCalibragem(C.getContext())).listarTudo(itens.get(position)),
                 holder.tvAudio,
@@ -79,9 +66,6 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 false);
 
         holder.ivTipo.setImageDrawable(U.getDispositivo(itens.get(position).getTipo()));
-
-
-
 
         final PopupMenu popupMenu = new PopupMenu(holder.btnMenuDispositivo.getContext(), holder.btnMenuDispositivo);
         popupMenu.inflate(R.menu.menu_adapter_dispositivo);
@@ -92,6 +76,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 popupMenu.show();
             }
         });
+
         holder.btnMenuDispositivo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -99,14 +84,14 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 return false;
             }
         });
+
         holder.layCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.layCard.getContext(), CalibragemActivity.class);
-                intent.putExtra("dispositivo", itens.get(position));
-                holder.layCard.getContext().startActivity(intent);
+                startActivity(position);
             }
         });
+
         holder.layCard.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -119,9 +104,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.menu_dispositivo_detalhes) {
-                    Intent intent = new Intent(holder.layCard.getContext(), CalibragemActivity.class);
-                    intent.putExtra("dispositivo", itens.get(position));
-                    holder.layCard.getContext().startActivity(intent);
+                    startActivity(position);
                     return true;
                 }
                 if (item.getItemId() == R.id.menu_dispositivo_editar) {
@@ -169,18 +152,20 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
+    private void startActivity(int position) {
+        Intent intent = new Intent(activity, CalibragemActivity.class);
+        intent.putExtra("dispositivo", itens.get(position));
+        activity.startActivityForResult(intent, C.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT);
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-//        if (viewType==0) {
-//            itemView = LayoutInflater.
-//                    from(parent.getContext()).
-//                    inflate(R.layout_toolbar_calibragem.menu_conteudo, parent, false);
-//            return new HolderMenuConteudo(itemView);
-//        }
+
         itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.adapter_dispositivos, parent, false);
+
         return new HolderDispositivo(itemView);
     }
 

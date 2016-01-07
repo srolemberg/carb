@@ -5,41 +5,41 @@
     android:padding="8dp">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/abc_btn_radio_material"
-        android:id="@+id/imageView" />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/abc_btn_radio_material" />
 
     <TextView
+        android:id="@+id/mocktext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mock Text"
-        android:id="@+id/mocktext"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Mock Text" />
 
     <TextView
+        android:id="@+id/mockid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mock ID"
-        android:id="@+id/mockid"
         android:layout_alignBottom="@+id/imageView"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_alignEnd="@+id/mocktext"
         android:layout_alignRight="@+id/mocktext"
-        android:layout_alignEnd="@+id/mocktext" />
+        android:layout_toRightOf="@+id/imageView"
+        android:text="Mock ID" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/colorAccent"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView"
+        android:background="@color/colorAccent" />
 </RelativeLayout>

@@ -2,19 +2,17 @@ package br.com.samirrolemberg.carb.adapter;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,9 +20,7 @@ import br.com.samirrolemberg.carb.CalibragemActivity;
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
-import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Calibragem;
-import br.com.samirrolemberg.carb.utils.C;
 import br.com.samirrolemberg.carb.utils.U;
 
 /**
@@ -47,19 +43,9 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return itens.size();
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        if (position==0) {
-//            return 0;
-//        }else{
-//            return 1;
-//        }
-//    }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder paramVH, final int position) {
-        //if (getItemViewType(position)!=0) {}else{}
         final HolderDispositivo holder = (HolderDispositivo) paramVH;
-
 
         if(itens.get(position).getUltimaAtualizacao() == null){
             holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
@@ -71,6 +57,9 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.tvVideo.setText(itens.get(position).getVideo().toString());
         holder.tvAudio.setText(itens.get(position).getAudio().toString());
         holder.tvDescricao.setText(itens.get(position).getDescricao());
+        if(TextUtils.isEmpty(itens.get(position).getDescricao())){
+            holder.tvDescricao.setVisibility(View.GONE);
+        }
         holder.tvTitulo.setText(itens.get(position).getTitulo());
         holder.ivTipo.setImageDrawable(U.getInstrumento(itens.get(position).getTipo()));
 
@@ -139,7 +128,8 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
-                            }).show();                    return true;
+                            }).show();
+                    return true;
                 }
                 return false;
             }
@@ -150,12 +140,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-//        if (viewType==0) {
-//            itemView = LayoutInflater.
-//                    from(parent.getContext()).
-//                    inflate(R.layout_toolbar_calibragem.menu_conteudo, parent, false);
-//            return new HolderMenuConteudo(itemView);
-//        }
+
         itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.adapter_calibragens, parent, false);

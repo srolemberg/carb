@@ -2,36 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <ScrollView
         android:id="@+id/rolamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/painel">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputTituloCalibragem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <EditText
+                    android:id="@+id/etTituloCalibragem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etTituloCalibragem"
                     android:hint="@string/hint_titulo"
-                    android:inputType="textPersonName"
-                    android:maxLength="15"
-                    android:imeOptions="actionNext"
                     android:imeActionId="@+id/etDescricaoCalibragem"
-                />
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:maxLength="140"
+                    android:maxLines="2" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -40,51 +42,52 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/inputTituloCalibragem"
                 android:layout_marginTop="8dp">
+
                 <EditText
+                    android:id="@+id/etDescricaoCalibragem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etDescricaoCalibragem"
                     android:hint="@string/hint_descricao"
-                    android:inputType="textMultiLine|textPersonName"
-                    android:maxLength="60"
-                    android:maxLines="2"
-                    android:imeOptions="actionNext"
                     android:imeActionId="@+id/etAudioCalibragem"
-                    />
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine|textPersonName"
+                    android:maxLength="280"
+                    android:maxLines="3" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/inputDescricaoCalibragem"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/linearLayout"
-                android:layout_marginTop="8dp">
+                android:layout_below="@+id/inputDescricaoCalibragem"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spnInstrumento"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="2"/>
+                    android:layout_weight="2" />
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/inputAudioCalibragem"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
                     <EditText
+                        android:id="@+id/etAudioCalibragem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/etAudioCalibragem"
                         android:hint="@string/hint_audio"
+                        android:imeActionId="@+id/etVideoCalibragem"
+                        android:imeOptions="actionNext"
                         android:inputType="numberSigned"
                         android:maxLength="4"
-                        android:imeOptions="actionNext"
-                        android:imeActionId="@+id/etVideoCalibragem"
-                        />
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -92,16 +95,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
                     <EditText
+                        android:id="@+id/etVideoCalibragem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/etVideoCalibragem"
                         android:hint="@string/hint_video"
+                        android:imeOptions="actionDone"
                         android:inputType="numberSigned"
                         android:maxLength="4"
-                        android:imeOptions="actionDone"
-                        />
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -112,26 +116,25 @@
         android:id="@+id/painel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:gravity="right"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancelar"
-            android:id="@+id/btnCancelarCalibragem"
-            style="?buttonBarNegativeButtonStyle"
-            />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="right"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnCancelarCalibragem"
+            style="?buttonBarNegativeButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/salvar"
+            android:text="@string/cancelar" />
+
+        <Button
             android:id="@+id/btnSalvarCalibragem"
             style="?buttonBarPositiveButtonStyle"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/salvar" />
 
     </LinearLayout>
 </RelativeLayout>

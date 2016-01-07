@@ -5,60 +5,59 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputDescricaoCalibragem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout"
-        android:layout_marginTop="8dp">
+        android:layout_below="@+id/inputDescricaoCalibragem"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spnDispositivo"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            />
+            android:layout_height="48dp" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputNomeDispositivo"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <EditText
+                android:id="@+id/etNomeDispositivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/etNomeDispositivo"
                 android:hint="@string/hint_nome_dispositivo"
-                android:inputType="textPersonName"
-                android:maxLength="15"
-                android:singleLine="true"/>
+                android:inputType="textPersonName|textMultiLine"
+                android:maxLength="140"
+                android:maxLines="2" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/continuar"
         android:id="@+id/btnSalvarDispositivo"
         style="?buttonBarPositiveButtonStyle"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancelar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="16dp"
+        android:text="@string/continuar" />
+
+    <Button
         android:id="@+id/btnCancelarDispositivo"
         style="?buttonBarNegativeButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="16dp"
         android:layout_toLeftOf="@+id/btnSalvarDispositivo"
         android:layout_toStartOf="@+id/btnSalvarDispositivo"
-        android:layout_marginTop="16dp"/>
+        android:text="@string/cancelar" />
 
 
 </RelativeLayout>

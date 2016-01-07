@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void exibirDialog(final Activity context){
+    public void exibirDialog(final Activity context) {
         final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_add_dispositivo, null);
 
         final Button btnPositive = (Button) view.findViewById(R.id.btnSalvarDispositivo);
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(context, CalibragemActivity.class);
                 intent.putExtra(getString(R.string.constante_dispositivo), dispositivo);
-                startActivity(intent);
+                startActivityForResult(intent, C.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT);
 
                 adapter.notifyDataSetChanged();
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void exibirDialog(final Activity context, final Dispositivo dispositivo){
+    public void exibirDialog(final Activity context, final Dispositivo dispositivo) {
         final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_add_dispositivo, null);
 
         final Button btnPositive = (Button) view.findViewById(R.id.btnSalvarDispositivo);
@@ -257,5 +257,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == C.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT) {
+            if (!dispositivos.isEmpty()) {
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }

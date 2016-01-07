@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,6 +58,8 @@ public class CalibragemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibragem);
 
+        setResult(C.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT);
+
         dispositivo = (Dispositivo) getIntent().getSerializableExtra(getString(R.string.constante_dispositivo));
 
         calibragens = new ArrayList<>();
@@ -94,6 +97,18 @@ public class CalibragemActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //sobreescreve o metodo do BACK na ActionBar para executar o Back do dispositivi
+        //para sempre executar o OnActivityResult na outra tela
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 
     private void exibirDialog(final Activity context){
