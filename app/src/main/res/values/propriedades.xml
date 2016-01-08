@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="DURACAO_ANIMACAO">400</integer>
+
+    <!-- ON ACTIVITY RESULT CONSTANTES -->
+    <integer name="REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT">1000</integer>
+    <integer name="RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT">1001</integer>
+
+</resources>

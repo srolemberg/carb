@@ -155,7 +155,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void startActivity(int position) {
         Intent intent = new Intent(activity, CalibragemActivity.class);
         intent.putExtra("dispositivo", itens.get(position));
-        activity.startActivityForResult(intent, C.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT);
+        activity.startActivityForResult(intent, C.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
     }
 
     @Override

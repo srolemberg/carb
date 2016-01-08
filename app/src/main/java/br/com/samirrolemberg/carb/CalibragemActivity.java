@@ -58,7 +58,7 @@ public class CalibragemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibragem);
 
-        setResult(C.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT);
+        setResult(C.getContext().getResources().getInteger(R.integer.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
 
         dispositivo = (Dispositivo) getIntent().getSerializableExtra(getString(R.string.constante_dispositivo));
 
@@ -140,22 +140,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
                     return;
                 }
 
@@ -232,22 +232,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.DURACAO_ANIMACAO_TEXT_FIELD).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
                     return;
                 }
 

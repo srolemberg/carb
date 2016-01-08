@@ -46,8 +46,4 @@ public class C extends Application{
         return tracker;
     }
 
-    public static final int DURACAO_ANIMACAO_TEXT_FIELD = 400;
-    public static final int REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT = 1000;
-    public static final int RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT = 1001;
-
 }
