@@ -115,22 +115,43 @@ public class U {
 
 		int u = 1;
 
-		if(C.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-			if(C.getContext().getResources().getDisplayMetrics().density > 3){
-				u = 2;
-			}else {
-				u = 1;
-			}
-		}else {//paisagem
-			if (C.getContext().getResources().getDisplayMetrics().density < 1.5) {
-				u = 1;
-			} else {
-				if (C.getContext().getResources().getDisplayMetrics().density > 3) {
+		if(!isTablet()){//se não é tablet
+			if(C.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+				if(C.getContext().getResources().getDisplayMetrics().density > 3){
 					u = 2;
+				}else {
+					u = 1;
+				}
+			}else {//paisagem
+				if (C.getContext().getResources().getDisplayMetrics().density < 1.5) {
+					u = 1;
 				} else {
-					u = 2;
+					if (C.getContext().getResources().getDisplayMetrics().density > 3) {
+						u = 2;
+					} else {
+						u = 2;
+					}
 				}
 			}
+		}else{
+			if(C.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+				if(C.getContext().getResources().getDisplayMetrics().density > 3){//retrato
+					u = 3;
+				}else {
+					u = 2;
+				}
+			}else {//paisagem
+				if (C.getContext().getResources().getDisplayMetrics().density < 1.5) {
+					u = 2;
+				} else {
+					if (C.getContext().getResources().getDisplayMetrics().density > 3) {
+						u = 4;
+					} else {
+						u = 3;
+					}
+				}
+			}
+
 		}
 		return u;
 	}
@@ -292,5 +313,9 @@ public class U {
 			return C.getContext().getResources().getDrawable(R.drawable.instrument_keyboard);
 		}
 		return C.getContext().getResources().getDrawable(R.drawable.ic_guitar_grey600_48dp);
+	}
+
+	public static boolean isTablet(){
+		return C.getContext().getResources().getBoolean(R.bool.isTablet);
 	}
 }

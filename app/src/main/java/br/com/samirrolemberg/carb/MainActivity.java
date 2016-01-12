@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.analytics.HitBuilders;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -227,15 +226,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.menu_dispositivo_configurar) {
-            Toast.makeText(MainActivity.this, "click Menu Configurar", Toast.LENGTH_LONG).show();
-            C.getTracker().send(new HitBuilders.EventBuilder()
-                    .setCategory("Menu Principal")
-                    .setAction("Configurar")
-                    .setLabel("abrir")
-                    .build());
-            return true;
-        }
         if (item.getItemId() == R.id.menu_dispositivo_sobre_carb) {
 //            C.getTracker().send(new HitBuilders.EventBuilder()
 //                    .setCategory("Menu Principal")
@@ -243,16 +233,18 @@ public class MainActivity extends AppCompatActivity {
 //                    .setLabel("abrir")
 //                    .build());
 
+            Intent intent = new Intent(MainActivity.this, SobreActivity.class);
+            startActivity(intent);
 
-            final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_sobre, null);
-
-            final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                    .setCancelable(true)
-                    .setView(view)
-                    .create();
-
-            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            dialog.show();
+//            final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_sobre, null);
+//
+//            final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+//                    .setCancelable(true)
+//                    .setView(view)
+//                    .create();
+//
+//            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//            dialog.show();
             return true;
         }
 

@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">CARB</string>
-    <string name="action_settings">Configuração</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="title_activity_calibragem">CalibragemActivity</string>
+    <string name="title_activity_calibragem">Calibragem</string>
+    <string name="title_activity_sobre">Sobre CARB</string>
     <string name="main_act_dialog_titulo">Informe o Dispositivo que será configurado. Ex: Tv da Sala</string>
     <string name="main_act_dialog_erro_spinner">Você precisa especificar o Instrumento</string>
     <string name="main_act_dialog_erro_nome">Você precisa especificar o nome do dispositivo</string>

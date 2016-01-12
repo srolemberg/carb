@@ -6,4 +6,8 @@
     <integer name="REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT">1000</integer>
     <integer name="RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT">1001</integer>
 
+    <!-- Constante Padrão para definir se é tablet ou não
+     http://stackoverflow.com/questions/9279111/determine-if-the-device-is-a-smartphone-or-tablet
+     -->
+    <bool name="isTablet">false</bool>
 </resources>

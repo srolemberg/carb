@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item android:id="@+id/menu_dispositivo_configurar"
-        android:title="@string/menu_configurar"
-        android:orderInCategory="1"
-        app:showAsAction="never" />
+    <!--<item android:id="@+id/menu_dispositivo_configurar"-->
+        <!--android:title="@string/menu_configurar"-->
+        <!--android:orderInCategory="1"-->
+        <!--app:showAsAction="never" />-->
     <item android:id="@+id/menu_dispositivo_sobre_carb"
         android:title="@string/menu_sobre"
         android:orderInCategory="2"
-        app:showAsAction="never" />
+        app:showAsAction="always"
+        android:icon="@drawable/ic_guitar_white_48dp"/>
 </menu>
