@@ -236,15 +236,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SobreActivity.class);
             startActivity(intent);
 
-//            final View view = MainActivity.this.getLayoutInflater().inflate(R.layout.dialog_sobre, null);
-//
-//            final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-//                    .setCancelable(true)
-//                    .setView(view)
-//                    .create();
-//
-//            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//            dialog.show();
             return true;
         }
 
