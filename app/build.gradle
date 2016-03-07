@@ -26,10 +26,19 @@ android {
         versionCode 1
 
         //modificar o version do arquivo de xml do GA (global.xml)
-        versionName "1.0"
+        versionName "1.0.0"
 
         //expresso android test
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //suporte ao SVG vector drawable antes do plugin 2.0 do gradle
+        // Stops the Gradle’s automatic rasterization of vectors
+        generatedDensities = []
+    }
+    //suporte ao SVG vector drawable antes do plugin 2.0 do gradle
+    // Flag that tells aapt to keep the attribute ids
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
     }
     buildTypes {
         release {
@@ -48,10 +57,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    compile 'com.android.support:appcompat-v7:23.1.+'
-    compile 'com.android.support:design:23.1.+'
-    compile 'com.android.support:cardview-v7:23.1.+'
-    compile 'com.android.support:recyclerview-v7:23.1.+'
+    compile 'com.android.support:appcompat-v7:23.2.+'
+    compile 'com.android.support:design:23.2.+'
+    compile 'com.android.support:cardview-v7:23.2.+'
+    compile 'com.android.support:recyclerview-v7:23.2.+'
 
     //analytics
     compile 'com.google.android.gms:play-services-analytics:8.1.0'

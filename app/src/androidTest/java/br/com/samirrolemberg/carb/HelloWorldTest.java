@@ -12,6 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.com.samirrolemberg.carb.activity.MainActivity;
+
 import static android.support.test.espresso.Espresso.*;
 
 /**

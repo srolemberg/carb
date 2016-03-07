@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.samirrolemberg.carb.CalibragemActivity;
+import br.com.samirrolemberg.carb.activity.CalibragemActivity;
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
