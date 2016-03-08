@@ -60,7 +60,7 @@
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_weight="1"
-                            android:background="@drawable/ic_dots_vertical_black_24dp"
+                            android:background="@drawable/ic_dots_vertical_black_48dp"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground" />
                     </LinearLayout>

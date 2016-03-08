@@ -11,5 +11,5 @@
         android:title="@string/menu_sobre"
         android:orderInCategory="2"
         app:showAsAction="always"
-        android:icon="@drawable/ic_guitar_white_48dp"/>
+        android:icon="@drawable/vector_guitar_white"/>
 </menu>
