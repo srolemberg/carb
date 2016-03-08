@@ -21,7 +21,7 @@ import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
 import br.com.samirrolemberg.carb.model.Calibragem;
-import br.com.samirrolemberg.carb.utils.U;
+import br.com.samirrolemberg.carb.utils.Utils;
 
 /**
  * Created by samir on 15/04/2015.
@@ -48,10 +48,10 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         final HolderDispositivo holder = (HolderDispositivo) paramVH;
 
         if(itens.get(position).getUltimaAtualizacao() == null){
-            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+            holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
         }else{
             holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
-            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
+            holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
 
         holder.tvVideo.setText(itens.get(position).getVideo().toString());
@@ -61,7 +61,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             holder.tvDescricao.setVisibility(View.GONE);
         }
         holder.tvTitulo.setText(itens.get(position).getTitulo());
-        holder.ivTipo.setImageDrawable(U.getInstrumento(itens.get(position).getTipo()));
+        holder.ivTipo.setImageDrawable(Utils.getInstrumento(itens.get(position).getTipo()));
 
         final PopupMenu popupMenu = new PopupMenu(holder.btnMenuCalibragem.getContext(), holder.btnMenuCalibragem);
         popupMenu.inflate(R.menu.menu_adapter_calibragem);

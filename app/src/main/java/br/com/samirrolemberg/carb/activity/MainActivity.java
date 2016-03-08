@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,8 +32,8 @@ import br.com.samirrolemberg.carb.adapter.DispositivoAdapter;
 import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Dispositivo;
-import br.com.samirrolemberg.carb.utils.C;
-import br.com.samirrolemberg.carb.utils.U;
+import br.com.samirrolemberg.carb.utils.CustomContext;
+import br.com.samirrolemberg.carb.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        C.getTracker().setScreenName(MainActivity.class.getSimpleName());
+        CustomContext.getTracker().setScreenName(MainActivity.class.getSimpleName());
+        Log.w("CustomContext", "Status: isTablet() > " + Utils.isTablet());
     }
 
     @Override
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         rvDispositivo = (RecyclerView) findViewById(R.id.rvDispositivos);
 
-        layoutManager = new GridLayoutManager(MainActivity.this, U.getNumeroColunas(), GridLayoutManager.VERTICAL, false);
+        layoutManager = new GridLayoutManager(MainActivity.this, Utils.getNumeroColunas(), GridLayoutManager.VERTICAL, false);
         layoutManager.setSmoothScrollbarEnabled(true);
 
         rvDispositivo.setLayoutManager(layoutManager);
@@ -110,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
                 EditText nome = (EditText) view.findViewById(R.id.etNomeDispositivo);
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(nome);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(nome);
                     return;
                 }
 
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(context, CalibragemActivity.class);
                 intent.putExtra(getString(R.string.constante_dispositivo), dispositivo);
-                startActivityForResult(intent, C.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
+                startActivityForResult(intent, CustomContext.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
 
                 adapter.notifyDataSetChanged();
 
@@ -184,12 +186,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(context, R.string.main_act_dialog_erro_nome, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(nome);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(nome);
                     return;
                 }
 
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.menu_dispositivo_sobre_carb) {
-//            C.getTracker().send(new HitBuilders.EventBuilder()
+//            CustomContext.getTracker().send(new HitBuilders.EventBuilder()
 //                    .setCategory("Menu Principal")
 //                    .setAction("Sobre CARB")
 //                    .setLabel("abrir")
@@ -247,11 +249,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == C.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT)) {
+        if (requestCode == CustomContext.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT)) {
             if (!dispositivos.isEmpty()) {
                 adapter.notifyDataSetChanged();
             }
-            if(fab.getVisibility() != View.VISIBLE){
+            if (fab.getVisibility() != View.VISIBLE) {
                 fab.show();
             }
         }

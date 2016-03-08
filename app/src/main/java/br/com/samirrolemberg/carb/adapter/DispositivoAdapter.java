@@ -24,8 +24,8 @@ import br.com.samirrolemberg.carb.daos.DAOCalibragem;
 import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
-import br.com.samirrolemberg.carb.utils.C;
-import br.com.samirrolemberg.carb.utils.U;
+import br.com.samirrolemberg.carb.utils.CustomContext;
+import br.com.samirrolemberg.carb.utils.Utils;
 
 /**
  * Created by samir on 15/04/2015.
@@ -53,19 +53,19 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         holder.tvNome.setText(itens.get(position).getNome());
 
         if(itens.get(position).getUltimaAtualizacao() == null){
-            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
+            holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
         }else{
             holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
-            holder.tvDataCriacao.setText(U.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
+            holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
 
-        U.atualizaMedia(
-                (new DAOCalibragem(C.getContext())).listarTudo(itens.get(position)),
+        Utils.atualizaMedia(
+                (new DAOCalibragem(CustomContext.getContext())).listarTudo(itens.get(position)),
                 holder.tvAudio,
                 holder.tvVideo,
                 false);
 
-        holder.ivTipo.setImageDrawable(U.getDispositivo(itens.get(position).getTipo()));
+        holder.ivTipo.setImageDrawable(Utils.getDispositivo(itens.get(position).getTipo()));
 
         final PopupMenu popupMenu = new PopupMenu(holder.btnMenuDispositivo.getContext(), holder.btnMenuDispositivo);
         popupMenu.inflate(R.menu.menu_adapter_dispositivo);
@@ -155,7 +155,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void startActivity(int position) {
         Intent intent = new Intent(activity, CalibragemActivity.class);
         intent.putExtra("dispositivo", itens.get(position));
-        activity.startActivityForResult(intent, C.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
+        activity.startActivityForResult(intent, CustomContext.getContext().getResources().getInteger(R.integer.REQUEST__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
     }
 
     @Override

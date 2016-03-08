@@ -31,8 +31,8 @@ import br.com.samirrolemberg.carb.conn.DatabaseManager;
 import br.com.samirrolemberg.carb.daos.DAOCalibragem;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
-import br.com.samirrolemberg.carb.utils.C;
-import br.com.samirrolemberg.carb.utils.U;
+import br.com.samirrolemberg.carb.utils.CustomContext;
+import br.com.samirrolemberg.carb.utils.Utils;
 
 public class CalibragemActivity extends AppCompatActivity {
 
@@ -51,7 +51,7 @@ public class CalibragemActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        C.getTracker().setScreenName(CalibragemActivity.class.getSimpleName());
+        CustomContext.getTracker().setScreenName(CalibragemActivity.class.getSimpleName());
     }
 
     @Override
@@ -59,13 +59,13 @@ public class CalibragemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibragem);
 
-        setResult(C.getContext().getResources().getInteger(R.integer.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
+        setResult(CustomContext.getContext().getResources().getInteger(R.integer.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
 
         dispositivo = (Dispositivo) getIntent().getSerializableExtra(getString(R.string.constante_dispositivo));
 
         calibragens = new ArrayList<>();
 
-        daoCalibragem = new DAOCalibragem(C.getContext());
+        daoCalibragem = new DAOCalibragem(CustomContext.getContext());
         calibragens = daoCalibragem.listarTudo(dispositivo);
         DatabaseManager.getInstance().closeDatabase();
 
@@ -73,7 +73,7 @@ public class CalibragemActivity extends AppCompatActivity {
 
         rvCalibragem = (RecyclerView) findViewById(R.id.rvCalibragem);
 
-        layoutManager = new GridLayoutManager(CalibragemActivity.this, U.getNumeroColunas(), GridLayoutManager.VERTICAL, false);
+        layoutManager = new GridLayoutManager(CalibragemActivity.this, Utils.getNumeroColunas(), GridLayoutManager.VERTICAL, false);
         layoutManager.setSmoothScrollbarEnabled(true);
 
         rvCalibragem.setLayoutManager(layoutManager);
@@ -88,7 +88,7 @@ public class CalibragemActivity extends AppCompatActivity {
         audioToolBar = (TextView) toolbar.findViewById(R.id.tvLabelAudioToolBarCalibragem);
         videoToolBar = (TextView) toolbar.findViewById(R.id.tvLabelVideoToolBarCalibragem);
 
-        U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
+        Utils.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -141,22 +141,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
                     return;
                 }
 
@@ -181,7 +181,7 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 rvCalibragem.smoothScrollToPosition(adapter.getItemCount());
 
-                U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
+                Utils.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
 
             }
         });
@@ -233,22 +233,22 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(titulo.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_titulo, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(titulo);
                     return;
                 }
                 if (spn.getSelectedItemPosition() == 0) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_spinner, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(spn);
                     return;
                 }
                 if (TextUtils.isEmpty(audio.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_audio, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(audio);
                     return;
                 }
                 if (TextUtils.isEmpty(video.getText().toString())) {
                     Toast.makeText(context, R.string.calibragem_act_dialog_erro_video, Toast.LENGTH_LONG).show();
-                    YoYo.with(Techniques.Swing).duration(C.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
+                    YoYo.with(Techniques.Swing).duration(CustomContext.getContext().getResources().getInteger(R.integer.DURACAO_ANIMACAO)).playOn(video);
                     return;
                 }
 
@@ -268,7 +268,7 @@ public class CalibragemActivity extends AppCompatActivity {
                 daoCalibragem.atualiza(calibragem);
                 DatabaseManager.getInstance().closeDatabase();
                 
-                U.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
+                Utils.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
             }
         });
 
