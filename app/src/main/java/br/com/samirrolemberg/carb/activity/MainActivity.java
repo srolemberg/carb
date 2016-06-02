@@ -19,27 +19,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import br.com.samirrolemberg.carb.daos.DispositivoDAO;
+import br.com.samirrolemberg.carb.helper.RealmHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.adapter.DispositivoAdapter;
-import br.com.samirrolemberg.carb.conn.DatabaseManager;
-import br.com.samirrolemberg.carb.daos.DAODispositivo;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.CustomContext;
 import br.com.samirrolemberg.carb.utils.Utils;
+import io.realm.Realm;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
-    private DAODispositivo daoDispositivo;
     private List<Dispositivo> dispositivos;
     private DispositivoAdapter adapter;
     private RecyclerView rvDispositivo;
@@ -68,11 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dispositivos = new ArrayList<>();
-
-        daoDispositivo = new DAODispositivo(MainActivity.this);
-        dispositivos = daoDispositivo.listarTudo();
-        DatabaseManager.getInstance().closeDatabase();
+        dispositivos = new DispositivoDAO(RealmHelper.getInstance()).findAll();
 
         adapter = new DispositivoAdapter(dispositivos, MainActivity.this);
 
@@ -124,13 +120,16 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
 
                 Dispositivo dispositivo = new Dispositivo();
+                dispositivo.setId(UUID.randomUUID().toString());
                 dispositivo.setNome(nome.getText().toString());
                 dispositivo.setDataCriacao(new Date());
                 dispositivo.setTipo(spn.getSelectedItemPosition());
 
-                daoDispositivo = new DAODispositivo(context);
-                dispositivo = daoDispositivo.buscar(daoDispositivo.inserir(dispositivo));
-                DatabaseManager.getInstance().closeDatabase();
+                Realm realm = RealmHelper.getInstance();
+
+                realm.beginTransaction();
+                realm.copyToRealm(dispositivo);
+                realm.commitTransaction();
 
                 dispositivos.add(dispositivo);
 
@@ -197,13 +196,18 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
+
+
+                Realm realm = RealmHelper.getInstance();
+
+                realm.beginTransaction();
+
                 dispositivo.setNome(nome.getText().toString());
                 dispositivo.setUltimaAtualizacao(new Date());
                 dispositivo.setTipo(spn.getSelectedItemPosition());
 
-                daoDispositivo = new DAODispositivo(context);
-                daoDispositivo.atualiza(dispositivo);
-                DatabaseManager.getInstance().closeDatabase();
+                realm.copyToRealmOrUpdate(dispositivo);
+                realm.commitTransaction();
 
                 adapter.notifyDataSetChanged();
 

@@ -19,9 +19,8 @@ import java.util.List;
 import br.com.samirrolemberg.carb.activity.CalibragemActivity;
 import br.com.samirrolemberg.carb.activity.MainActivity;
 import br.com.samirrolemberg.carb.R;
-import br.com.samirrolemberg.carb.conn.DatabaseManager;
-import br.com.samirrolemberg.carb.daos.DAOCalibragem;
-import br.com.samirrolemberg.carb.daos.DAODispositivo;
+import br.com.samirrolemberg.carb.daos.CalibragemDAO;
+import br.com.samirrolemberg.carb.helper.RealmHelper;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.CustomContext;
@@ -58,9 +57,9 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
             holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
-
+        //new DAOCalibragem(CustomContext.getContext())).listarTudo(itens.get(position))
         Utils.atualizaMedia(
-                (new DAOCalibragem(CustomContext.getContext())).listarTudo(itens.get(position)),
+                (new CalibragemDAO(RealmHelper.getInstance()).findAllByDispositivo(itens.get(position))),
                 holder.tvAudio,
                 holder.tvVideo,
                 false);

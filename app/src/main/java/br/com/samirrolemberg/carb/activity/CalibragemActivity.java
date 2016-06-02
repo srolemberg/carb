@@ -17,29 +17,28 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import br.com.samirrolemberg.carb.daos.CalibragemDAO;
+import br.com.samirrolemberg.carb.helper.RealmHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.adapter.CalibragemAdapter;
-import br.com.samirrolemberg.carb.conn.DatabaseManager;
-import br.com.samirrolemberg.carb.daos.DAOCalibragem;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.CustomContext;
 import br.com.samirrolemberg.carb.utils.Utils;
+import io.realm.Realm;
+
 
 public class CalibragemActivity extends AppCompatActivity {
 
     private Dispositivo dispositivo;
     private Toolbar toolbar;
     private FloatingActionButton fab;
-    private DAOCalibragem daoCalibragem;
     private CalibragemAdapter adapter;
     private RecyclerView rvCalibragem;
     private GridLayoutManager layoutManager;
@@ -62,12 +61,7 @@ public class CalibragemActivity extends AppCompatActivity {
         setResult(CustomContext.getContext().getResources().getInteger(R.integer.RESULT__ATUALIZACAO_LISTA_DISPOSITIVO_ACT));
 
         dispositivo = (Dispositivo) getIntent().getSerializableExtra(getString(R.string.constante_dispositivo));
-
-        calibragens = new ArrayList<>();
-
-        daoCalibragem = new DAOCalibragem(CustomContext.getContext());
-        calibragens = daoCalibragem.listarTudo(dispositivo);
-        DatabaseManager.getInstance().closeDatabase();
+        calibragens = new CalibragemDAO(RealmHelper.getInstance()).findAll();
 
         adapter = new CalibragemAdapter(calibragens, CalibragemActivity.this);
 
@@ -162,6 +156,7 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
+
                 Calibragem calibragem = new Calibragem();
                         calibragem.setVideo(Integer.valueOf(video.getText().toString()));
                         calibragem.setTitulo(titulo.getText().toString());
@@ -171,9 +166,11 @@ public class CalibragemActivity extends AppCompatActivity {
                         calibragem.setDataCriacao(new Date());
                         calibragem.setTipo(spn.getSelectedItemPosition());
 
-                daoCalibragem = new DAOCalibragem(context);
-                calibragem = daoCalibragem.buscar(daoCalibragem.inserir(calibragem, dispositivo.getId()), dispositivo);
-                DatabaseManager.getInstance().closeDatabase();
+	            Realm realm = RealmHelper.getInstance();
+
+	            realm.beginTransaction();
+	            realm.copyToRealm(calibragem);
+                realm.commitTransaction();
 
                 calibragens.add(calibragem);
 
@@ -254,6 +251,10 @@ public class CalibragemActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
+	            Realm realm = RealmHelper.getInstance();
+
+	            realm.beginTransaction();
+
                 calibragem.setVideo(Integer.valueOf(video.getText().toString()));
                 calibragem.setTitulo(titulo.getText().toString());
                 calibragem.setDescricao(descricao.getText().toString());
@@ -261,13 +262,12 @@ public class CalibragemActivity extends AppCompatActivity {
                 calibragem.setUltimaAtualizacao(new Date());
                 calibragem.setTipo(spn.getSelectedItemPosition());
 
-                adapter.notifyDataSetChanged();
-                
 
-                daoCalibragem = new DAOCalibragem(context);
-                daoCalibragem.atualiza(calibragem);
-                DatabaseManager.getInstance().closeDatabase();
-                
+	            realm.copyToRealmOrUpdate(calibragem);
+	            realm.commitTransaction();
+
+                adapter.notifyDataSetChanged();
+
                 Utils.atualizaMedia(calibragens, audioToolBar, videoToolBar, true);
             }
         });

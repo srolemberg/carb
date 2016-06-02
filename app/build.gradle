@@ -4,11 +4,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.21.6'
     }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'realm-android'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -17,7 +18,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "br.com.samirrolemberg.carb"
@@ -50,20 +51,20 @@ android {
 
 //expresso android test
 configurations.all {
-    resolutionStrategy.force 'com.android.support:support-annotations:23.2.0'
+    resolutionStrategy.force 'com.android.support:support-annotations:23.3.0'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    compile 'com.android.support:appcompat-v7:23.2.+'
-    compile 'com.android.support:design:23.2.+'
-    compile 'com.android.support:cardview-v7:23.2.+'
-    compile 'com.android.support:recyclerview-v7:23.2.+'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
 
     //analytics
-    compile 'com.google.android.gms:play-services-analytics:8.1.0'
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
 
     //crashlitics
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
@@ -76,7 +77,7 @@ dependencies {
     compile 'com.daimajia.androidanimations:library:1.1.3@aar'
 
     //expresso android test
-    compile 'com.android.support:support-annotations:23.2.0'
+    compile 'com.android.support:support-annotations:23.3.0'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
 }

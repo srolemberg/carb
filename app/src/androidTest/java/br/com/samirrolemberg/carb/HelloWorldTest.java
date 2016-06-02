@@ -1,6 +1,5 @@
 package br.com.samirrolemberg.carb;
 
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -11,7 +10,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import br.com.samirrolemberg.carb.activity.MainActivity;
 
 import static android.support.test.espresso.Espresso.*;
@@ -31,6 +29,8 @@ public class HelloWorldTest {
     public void listGoesOverTheFold(){
         onView(ViewMatchers.withText("CARB")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
+
+
 
     @Test
     public void loopClickFAB(){
