@@ -19,8 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import br.com.samirrolemberg.carb.daos.DispositivoDAO;
-import br.com.samirrolemberg.carb.helper.RealmHelper;
+
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -30,6 +29,8 @@ import java.util.UUID;
 
 import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.adapter.DispositivoAdapter;
+import br.com.samirrolemberg.carb.daos.DispositivoDAO;
+import br.com.samirrolemberg.carb.helper.RealmHelper;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.CustomContext;
 import br.com.samirrolemberg.carb.utils.Utils;
@@ -195,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 dialog.dismiss();
-
 
 
                 Realm realm = RealmHelper.getInstance();

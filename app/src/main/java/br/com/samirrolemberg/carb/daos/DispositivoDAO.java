@@ -1,13 +1,13 @@
 package br.com.samirrolemberg.carb.daos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.Coluna;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -33,5 +33,12 @@ public class DispositivoDAO {
 			}
 		}
 		return lista;
+	}
+
+	public boolean remove(Dispositivo dispositivo){
+		RealmResults<Dispositivo> results = realm.where(Dispositivo.class)
+				.equalTo(Coluna.Dispositivo.ID, dispositivo.getId())
+				.findAll();
+		return results.deleteFirstFromRealm();
 	}
 }

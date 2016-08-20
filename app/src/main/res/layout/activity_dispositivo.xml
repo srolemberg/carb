@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coord"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -30,10 +31,10 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:srcCompat="@drawable/vector_note_plus"
         android:tint="@color/icons"
         app:layout_anchor="@+id/rvDispositivos"
         app:layout_anchorGravity="bottom|end"
-        app:layout_behavior="br.com.samirrolemberg.carb.helper.FABScrollBehavior" />
+        app:layout_behavior="br.com.samirrolemberg.carb.helper.FABScrollBehavior"
+        app:srcCompat="@drawable/vector_note_plus" />
 
 </android.support.design.widget.CoordinatorLayout>

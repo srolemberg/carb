@@ -1,14 +1,14 @@
 package br.com.samirrolemberg.carb.daos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.Coluna;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -49,5 +49,12 @@ public class CalibragemDAO {
 			}
 		}
 		return lista;
+	}
+
+	public boolean remove(Calibragem calibragem){
+		RealmResults<Calibragem> results = realm.where(Calibragem.class)
+				.equalTo(Coluna.Calibragem.ID, calibragem.getId())
+				.findAll();
+		return results.deleteFirstFromRealm();
 	}
 }

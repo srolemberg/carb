@@ -16,15 +16,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.activity.CalibragemActivity;
 import br.com.samirrolemberg.carb.activity.MainActivity;
-import br.com.samirrolemberg.carb.R;
 import br.com.samirrolemberg.carb.daos.CalibragemDAO;
+import br.com.samirrolemberg.carb.daos.DispositivoDAO;
 import br.com.samirrolemberg.carb.helper.RealmHelper;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.model.Dispositivo;
 import br.com.samirrolemberg.carb.utils.CustomContext;
 import br.com.samirrolemberg.carb.utils.Utils;
+import io.realm.Realm;
 
 /**
  * Created by samir on 15/04/2015.
@@ -119,17 +121,24 @@ public class DispositivoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //remove todas as calibragens de um dispositivo
-                                    DAOCalibragem daoCalibragem = new DAOCalibragem(holder.layCard.getContext());
-                                    List<Calibragem> calibragens = daoCalibragem.listarTudo(itens.get(position));
+                                    Realm realm = RealmHelper.getInstance();
+
+                                    realm.beginTransaction();
+
+                                    CalibragemDAO daoCalibragem = new CalibragemDAO(realm);
+
+                                    List<Calibragem> calibragens = daoCalibragem.findAllByDispositivo(itens.get(position));
 
                                     for (Calibragem c : calibragens) {
-                                        daoCalibragem.remover(c);
+                                        daoCalibragem.remove(c);
                                     }
-                                    DatabaseManager.getInstance().closeDatabase();//fecha conexão de calibragem
+                                    //DatabaseManager.getInstance().closeDatabase();//fecha conexão de calibragem
 
-                                    DAODispositivo daoDispositivo = new DAODispositivo(holder.layCard.getContext());
-                                    daoDispositivo.remover(itens.get(position));
-                                    DatabaseManager.getInstance().closeDatabase();
+                                    DispositivoDAO daoDispositivo = new DispositivoDAO(realm);
+                                    daoDispositivo.remove(itens.get(position));
+                                    //DatabaseManager.getInstance().closeDatabase();
+
+                                    realm.commitTransaction();
 
                                     itens.remove(position);
                                     notifyItemRemoved(position);

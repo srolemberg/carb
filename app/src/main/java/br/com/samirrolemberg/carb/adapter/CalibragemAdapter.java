@@ -16,11 +16,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.samirrolemberg.carb.activity.CalibragemActivity;
 import br.com.samirrolemberg.carb.R;
-import br.com.samirrolemberg.carb.conn.DatabaseManager;
+import br.com.samirrolemberg.carb.activity.CalibragemActivity;
+import br.com.samirrolemberg.carb.daos.CalibragemDAO;
+import br.com.samirrolemberg.carb.helper.RealmHelper;
 import br.com.samirrolemberg.carb.model.Calibragem;
 import br.com.samirrolemberg.carb.utils.Utils;
+import io.realm.Realm;
 
 /**
  * Created by samir on 15/04/2015.
@@ -46,9 +48,9 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder paramVH, final int position) {
         final HolderDispositivo holder = (HolderDispositivo) paramVH;
 
-        if(itens.get(position).getUltimaAtualizacao() == null){
+        if (itens.get(position).getUltimaAtualizacao() == null) {
             holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getDataCriacao(), holder.layCard.getContext()));
-        }else{
+        } else {
             holder.tvLabelDataCriacao.setText(R.string.atualizado_em__);
             holder.tvDataCriacao.setText(Utils.time_24_date_mask(itens.get(position).getUltimaAtualizacao(), holder.layCard.getContext()));
         }
@@ -56,7 +58,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.tvVideo.setText(itens.get(position).getVideo().toString());
         holder.tvAudio.setText(itens.get(position).getAudio().toString());
         holder.tvDescricao.setText(itens.get(position).getDescricao());
-        if(TextUtils.isEmpty(itens.get(position).getDescricao())){
+        if (TextUtils.isEmpty(itens.get(position).getDescricao())) {
             holder.tvDescricao.setVisibility(View.GONE);
         }
         holder.tvTitulo.setText(itens.get(position).getTitulo());
@@ -99,11 +101,11 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.menu_calibragem_editar){
+                if (item.getItemId() == R.id.menu_calibragem_editar) {
                     activity.exibirDialog(activity, itens.get(position));
                     return true;
                 }
-                if(item.getItemId() == R.id.menu_calibragem_excluir){
+                if (item.getItemId() == R.id.menu_calibragem_excluir) {
                     AlertDialog alertDialog = new AlertDialog.Builder(holder.layCard.getContext())
                             .setTitle(activity.getString(R.string.excluir))
                             .setMessage(activity.getString(R.string.dialog_msg_excluir_item) + itens.get(position).getTitulo() + "' ?")
@@ -112,9 +114,12 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //remove todas as calibragens de um dispositivo
-                                    DAOCalibragem daoCalibragem = new DAOCalibragem(holder.layCard.getContext());
-                                    daoCalibragem.remover(itens.get(position));
-                                    DatabaseManager.getInstance().closeDatabase();//fecha conexão de calibragem
+                                    Realm realm = RealmHelper.getInstance();
+                                    CalibragemDAO daoCalibragem = new CalibragemDAO(realm);
+
+                                    realm.beginTransaction();
+                                    daoCalibragem.remove(itens.get(position));
+                                    realm.commitTransaction();
 
                                     itens.remove(position);
                                     notifyItemRemoved(position);
@@ -146,7 +151,7 @@ public class CalibragemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return new HolderDispositivo(itemView);
     }
 
-    public static class HolderDispositivo extends RecyclerView.ViewHolder{
+    public static class HolderDispositivo extends RecyclerView.ViewHolder {
 
         protected TextView tvTitulo, tvDescricao, tvAudio, tvVideo, tvDataCriacao, tvLabelDataCriacao;
         protected ImageView ivTipo;
